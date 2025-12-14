@@ -1,5 +1,9 @@
 # TestGen
 
+<p align="center">
+  <img src="website/images/logo.png" alt="TestGen Logo" width="120" />
+</p>
+
 **AI-Powered Multi-Language Test Generation CLI**
 
 TestGen automatically generates production-ready tests for source code across JavaScript/TypeScript, Python, Go, and Rust using LLM APIs (Anthropic Claude, OpenAI GPT, Google Gemini, Groq).
