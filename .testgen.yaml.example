@@ -1,0 +1,74 @@
+# TestGen Example Configuration
+# Place this file as .testgen.yaml in your project root
+
+# LLM Provider Settings
+llm:
+  # Provider to use: "anthropic" or "openai"
+  provider: anthropic
+  
+  # Model to use
+  # Anthropic: claude-3-5-sonnet-20241022
+  # OpenAI: gpt-4-turbo-preview
+  model: claude-3-5-sonnet-20241022
+  
+  # Environment variable containing API key
+  api_key_env: ANTHROPIC_API_KEY
+  
+  # Temperature for generation (0.0 - 1.0)
+  # Lower = more deterministic, Higher = more creative
+  temperature: 0.3
+  
+  # Maximum tokens for response
+  max_tokens: 4096
+
+# Test Generation Settings
+generation:
+  # Number of files to batch in a single API request
+  batch_size: 5
+  
+  # Number of parallel workers for generation
+  parallel_workers: 4
+  
+  # Timeout in seconds for each file
+  timeout_seconds: 30
+
+# Output Settings
+output:
+  # Default output format: text, json, html
+  format: text
+  
+  # Include coverage information in reports
+  include_coverage: true
+
+# Per-Language Settings
+languages:
+  javascript:
+    frameworks:
+      - jest
+      - vitest
+      - mocha
+    default_framework: jest
+    
+  python:
+    frameworks:
+      - pytest
+      - unittest
+    default_framework: pytest
+    
+  go:
+    frameworks:
+      - testing
+    # Uses testify assertions by default
+    
+  rust:
+    frameworks:
+      - cargo-test
+    default_framework: cargo-test
+
+# Path-specific overrides (optional)
+# paths:
+#   ./auth/:
+#     type: [unit, integration, negative]
+#   ./data/:
+#     type: [unit]
+#     parallel_workers: 2
