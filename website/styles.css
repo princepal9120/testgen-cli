@@ -128,12 +128,18 @@ h6 {
 
 /* ===== Navigation ===== */
 .nav {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     right: 0;
     z-index: 100;
-    padding: 24px 0;
+    padding: 16px 0;
+    /* Slightly reduced padding for a tighter header */
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
 }
 
 .nav-container {
@@ -738,6 +744,7 @@ h6 {
     font-size: 1.5rem;
     margin-left: 8px;
 }
+
 /* Responsive */
 @media (max-width: 768px) {
     .split-section {
