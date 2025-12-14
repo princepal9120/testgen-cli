@@ -525,6 +525,21 @@ h6 {
     line-height: 1.7;
 }
 
+.docs-content ul {
+    margin: 16px 0;
+    padding-left: 24px;
+}
+
+.docs-content li {
+    margin-bottom: 8px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+}
+
+.docs-content li strong {
+    color: var(--text-primary);
+}
+
 /* Code Blocks in Docs */
 .docs-content .code-block {
     background: #F4F4F5;
@@ -588,6 +603,67 @@ h6 {
         position: relative;
         top: 0;
     }
+}
+
+/* ===== Languages Section ===== */
+.languages {
+    padding: 100px 0;
+    text-align: center;
+    background: var(--bg-primary);
+}
+
+.languages h2 {
+    font-size: 3rem;
+    margin-bottom: 60px;
+}
+
+.lang-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 32px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.lang-card {
+    background: #FFFFFF;
+    border: 1px solid #E5E5E5;
+    border-radius: 16px;
+    padding: 40px 24px;
+    text-align: center;
+    transition: all 0.3s;
+}
+
+.lang-card:hover {
+    border-color: var(--accent-primary);
+    transform: translateY(-4px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.lang-icon {
+    height: 64px;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.lang-icon img {
+    height: 100%;
+    width: auto;
+    object-fit: contain;
+}
+
+.lang-card h4 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    font-family: var(--font-heading);
+}
+
+.lang-card p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
 }
 
 /* ===== Footer ===== */

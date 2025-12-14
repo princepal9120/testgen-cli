@@ -113,6 +113,79 @@ export ANTHROPIC_API_KEY="sk-ant-..."
 export OPENAI_API_KEY="sk-..."</code></pre>
                 </div>
             </section>
+
+            <section id="generating-tests">
+                <h2>Generating Tests</h2>
+                <p>TestGen provides several commands for generating tests. Here are the most common use cases:</p>
+
+                <h3>Single File</h3>
+                <p>Generate tests for a single source file:</p>
+                <div class="code-block">
+                    <pre><code>testgen generate --file=./src/utils.py --type=unit</code></pre>
+                </div>
+
+                <h3>Entire Directory</h3>
+                <p>Process all files in a directory recursively:</p>
+                <div class="code-block">
+                    <pre><code>testgen generate --path=./src --recursive --type=unit,edge-cases</code></pre>
+                </div>
+
+                <h3>Dry Run (Preview)</h3>
+                <p>Preview what tests would be generated without writing files:</p>
+                <div class="code-block">
+                    <pre><code>testgen generate --path=./src --dry-run --output-format=json</code></pre>
+                </div>
+
+                <h3>With Validation</h3>
+                <p>Generate tests and validate they compile/run:</p>
+                <div class="code-block">
+                    <pre><code>testgen generate --path=./src --validate --parallel=4</code></pre>
+                </div>
+
+                <h3>Cost Estimation</h3>
+                <p>Estimate the API cost before generating:</p>
+                <div class="code-block">
+                    <pre><code>testgen analyze --path=./src --cost-estimate
+
+# Output:
+# === Codebase Analysis ===
+# Total files:     24
+# Total lines:     3,456
+# Est. functions:  89
+#
+# Estimated tokens: 45,000
+# Estimated cost:   $0.38 USD</code></pre>
+                </div>
+            </section>
+
+            <section id="supported-languages">
+                <h2>Supported Languages</h2>
+                <p>TestGen supports multiple programming languages and their popular testing frameworks:</p>
+
+                <h3>JavaScript / TypeScript</h3>
+                <ul>
+                    <li><strong>Frameworks:</strong> Jest, Vitest, Mocha</li>
+                    <li><strong>Extensions:</strong> .js, .jsx, .ts, .tsx</li>
+                </ul>
+
+                <h3>Python</h3>
+                <ul>
+                    <li><strong>Frameworks:</strong> pytest, unittest</li>
+                    <li><strong>Extensions:</strong> .py</li>
+                </ul>
+
+                <h3>Go</h3>
+                <ul>
+                    <li><strong>Frameworks:</strong> testing (standard library), testify</li>
+                    <li><strong>Extensions:</strong> .go</li>
+                </ul>
+
+                <h3>Rust</h3>
+                <ul>
+                    <li><strong>Frameworks:</strong> cargo test (built-in)</li>
+                    <li><strong>Extensions:</strong> .rs</li>
+                </ul>
+            </section>
         </main>
     </div>
 
