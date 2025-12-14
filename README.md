@@ -7,7 +7,7 @@ TestGen automatically generates production-ready tests for source code across Ja
 ## Features
 
 - 🌍 **Multi-Language Support**: JavaScript/TypeScript, Python, Go, Rust
-- 🧪 **Multiple Test Types**: Unit, edge-cases, negative, table-driven, integration
+- 🧪 **Multiple Test Types**: Unit, edge-cases, negative, table-driven, integrationble-driven, integration
 - 🔌 **Framework Aware**: Jest, Vitest, pytest, Go testing, cargo test
 - 💰 **Cost Optimized**: Semantic caching, request batching
 - 🔧 **CI/CD Ready**: JSON output, meaningful exit codes, quiet mode
@@ -158,6 +158,8 @@ languages:
 |----------|------------|-------------------|------------|
 | JavaScript/TypeScript | `.js`, `.ts`, `.jsx`, `.tsx` | Jest | unit, edge-cases, negative |
 | Python | `.py` | pytest | unit, edge-cases, negative |
+| Go | `.go` | testing + testify | unit, table-driven, edge-cases, negative |
+| Rust | `.rs` | cargo test | unit, edge-cases, negative |
 | Go | `.go` | testing + testify | unit, table-driven, edge-cases, negative |
 | Rust | `.rs` | cargo test | unit, edge-cases, negative |
 

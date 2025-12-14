@@ -21,7 +21,7 @@ var (
 func DefaultRegistry() *Registry {
 	once.Do(func() {
 		defaultRegistry = NewRegistry()
-		// Register all built-in adapters
+		// Register supported adapters
 		defaultRegistry.Register(NewGoAdapter())
 		defaultRegistry.Register(NewPythonAdapter())
 		defaultRegistry.Register(NewJavaScriptAdapter())
