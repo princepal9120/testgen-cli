@@ -76,10 +76,18 @@ func (a *JavaScriptAdapter) ParseFile(content string) (*models.AST, error) {
 	patterns := []*regexp.Regexp{
 		// Standard function declaration
 		regexp.MustCompile(`(?:export\s+)?(?:async\s+)?function\s+(\w+)\s*\(([^)]*)\)`),
-		// Arrow function assigned to variable
+		// Arrow function assigned to variable (simple params)
 		regexp.MustCompile(`(?:export\s+)?(?:const|let|var)\s+(\w+)\s*=\s*(?:async\s+)?\(([^)]*)\)\s*=>`),
 		// Function expression
 		regexp.MustCompile(`(?:export\s+)?(?:const|let|var)\s+(\w+)\s*=\s*(?:async\s+)?function\s*\(([^)]*)\)`),
+		// React component with destructured props: const Component = ({ prop1, prop2 }) => ...
+		regexp.MustCompile(`(?:export\s+)?(?:const|let|var)\s+(\w+)\s*(?::\s*(?:React\.)?FC[^=]*)?\s*=\s*\(\s*\{([^}]*)\}\s*(?::\s*\w+)?\)\s*=>`),
+		// React component with props type: const Component = (props: Props) => ...
+		regexp.MustCompile(`(?:export\s+)?(?:const|let|var)\s+(\w+)\s*(?::\s*(?:React\.)?FC[^=]*)?\s*=\s*\(\s*(\w+)\s*:\s*\w+[^)]*\)\s*=>`),
+		// React.forwardRef component
+		regexp.MustCompile(`(?:export\s+)?(?:const|let|var)\s+(\w+)\s*=\s*(?:React\.)?forwardRef[^(]*\(\s*\(([^)]*)\)`),
+		// Default export functions
+		regexp.MustCompile(`export\s+default\s+(?:async\s+)?function\s+(\w+)\s*\(([^)]*)\)`),
 	}
 
 	// TypeScript-specific: method declarations in classes

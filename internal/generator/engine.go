@@ -51,6 +51,10 @@ func NewEngine(config EngineConfig) (*Engine, error) {
 	switch strings.ToLower(config.Provider) {
 	case "openai":
 		provider = llm.NewOpenAIProvider()
+	case "gemini":
+		provider = llm.NewGeminiProvider()
+	case "groq":
+		provider = llm.NewGroqProvider()
 	default:
 		// Default to Anthropic
 		provider = llm.NewAnthropicProvider()

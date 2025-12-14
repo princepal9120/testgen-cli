@@ -2,7 +2,7 @@
 
 **AI-Powered Multi-Language Test Generation CLI**
 
-TestGen automatically generates production-ready tests for source code across JavaScript/TypeScript, Python, Go, and Rust using LLM APIs (Anthropic Claude, OpenAI GPT).
+TestGen automatically generates production-ready tests for source code across JavaScript/TypeScript, Python, Go, and Rust using LLM APIs (Anthropic Claude, OpenAI GPT, Google Gemini, Groq).
 
 ## Features
 
@@ -31,15 +31,19 @@ go install .
 
 ### Binary Releases
 
-Download from [GitHub Releases](https://github.com/testgen/testgen/releases).
+Download from [GitHub Releases](https://github.com/princepal9120/testgen-cli/releases).
 
 ## Quick Start
 
 ```bash
-# Set your API key
-export ANTHROPIC_API_KEY="your-api-key"
+# Set your API key (choose one provider)
+export ANTHROPIC_API_KEY="your-api-key"    # Anthropic Claude
 # or
-export OPENAI_API_KEY="your-api-key"
+export OPENAI_API_KEY="your-api-key"       # OpenAI GPT
+# or
+export GEMINI_API_KEY="your-api-key"       # Google Gemini
+# or
+export GROQ_API_KEY="your-api-key"         # Groq (fastest, cheapest)
 
 # Generate tests for a single file
 testgen generate --file=./src/utils.py --type=unit
@@ -117,8 +121,13 @@ Create a `.testgen.yaml` file in your project root:
 
 ```yaml
 llm:
-  provider: anthropic        # anthropic or openai
+  provider: anthropic        # anthropic, openai, gemini, or groq
   model: claude-3-5-sonnet-20241022
+  # Models per provider:
+  #   anthropic: claude-3-5-sonnet-20241022
+  #   openai: gpt-4-turbo-preview
+  #   gemini: gemini-1.5-pro, gemini-1.5-flash
+  #   groq: llama-3.3-70b-versatile, mixtral-8x7b-32768
   temperature: 0.3
 
 generation:
@@ -148,8 +157,10 @@ languages:
 | Variable | Description |
 |----------|-------------|
 | `ANTHROPIC_API_KEY` | Anthropic Claude API key |
-| `OPENAI_API_KEY` | OpenAI API key |
-| `TESTGEN_LLM_PROVIDER` | Default LLM provider |
+| `OPENAI_API_KEY` | OpenAI GPT API key |
+| `GEMINI_API_KEY` | Google Gemini API key |
+| `GROQ_API_KEY` | Groq Cloud API key |
+| `TESTGEN_LLM_PROVIDER` | Default LLM provider (anthropic, openai, gemini, groq) |
 | `TESTGEN_LLM_MODEL` | Default model |
 
 ## Supported Languages

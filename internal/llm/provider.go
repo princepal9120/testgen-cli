@@ -88,6 +88,8 @@ type Message struct {
 const (
 	AnthropicDefaultModel = "claude-3-5-sonnet-20241022"
 	OpenAIDefaultModel    = "gpt-4-turbo-preview"
+	GeminiDefaultModel    = "gemini-1.5-pro"
+	GroqDefaultModel      = "llama-3.3-70b-versatile"
 )
 
 // GetDefaultModel returns the default model for a provider
@@ -97,6 +99,10 @@ func GetDefaultModel(providerName string) string {
 		return AnthropicDefaultModel
 	case "openai":
 		return OpenAIDefaultModel
+	case "gemini":
+		return GeminiDefaultModel
+	case "groq":
+		return GroqDefaultModel
 	default:
 		return ""
 	}

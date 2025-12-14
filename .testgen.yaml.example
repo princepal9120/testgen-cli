@@ -3,15 +3,22 @@
 
 # LLM Provider Settings
 llm:
-  # Provider to use: "anthropic" or "openai"
+  # Provider to use: "anthropic", "openai", "gemini", or "groq"
   provider: anthropic
   
-  # Model to use
-  # Anthropic: claude-3-5-sonnet-20241022
-  # OpenAI: gpt-4-turbo-preview
+  # Model to use (per provider):
+  #   anthropic: claude-3-5-sonnet-20241022
+  #   openai: gpt-4-turbo-preview
+  #   gemini: gemini-1.5-pro, gemini-1.5-flash
+  #   groq: llama-3.3-70b-versatile, mixtral-8x7b-32768, llama-3.1-8b-instant
   model: claude-3-5-sonnet-20241022
   
   # Environment variable containing API key
+  # Defaults per provider:
+  #   anthropic: ANTHROPIC_API_KEY
+  #   openai: OPENAI_API_KEY
+  #   gemini: GEMINI_API_KEY
+  #   groq: GROQ_API_KEY
   api_key_env: ANTHROPIC_API_KEY
   
   # Temperature for generation (0.0 - 1.0)

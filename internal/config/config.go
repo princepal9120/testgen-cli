@@ -141,6 +141,10 @@ func GetAPIKey(cfg *Config) string {
 			envVar = "ANTHROPIC_API_KEY"
 		case "openai":
 			envVar = "OPENAI_API_KEY"
+		case "gemini":
+			envVar = "GEMINI_API_KEY"
+		case "groq":
+			envVar = "GROQ_API_KEY"
 		}
 	}
 	return os.Getenv(envVar)
