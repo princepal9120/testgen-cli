@@ -389,6 +389,14 @@ a {
 
 .os-icon {
     font-size: 1.25rem;
+    display: flex;
+    align-items: center;
+}
+
+.os-icon img {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
 }
 
 /* Install Flow */
@@ -684,8 +692,23 @@ a {
 }
 
 .lang-icon {
-    font-size: 3rem;
-    margin-bottom: 16px;
+    height: 64px;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.lang-icon img {
+    height: 100%;
+    width: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.2));
+}
+
+/* Specific styling for black logos in dark mode */
+.lang-icon img[src*="rust"] {
+    filter: invert(1) drop-shadow(0 4px 12px rgba(0, 0, 0, 0.2));
 }
 
 .lang-card h4 {
