@@ -138,8 +138,7 @@ h6 {
 
 .nav-container {
     display: flex;
-    justify-content: flex-end;
-    /* Right align as per ref image mostly? Or hidden? Ref doesn't show nav clearly, keeping minimal */
+    justify-content: space-between;
     align-items: center;
     max-width: 1200px;
     margin: 0 auto;
@@ -159,6 +158,16 @@ h6 {
 
 .nav-links a:hover {
     color: var(--accent-primary);
+}
+
+.nav-logo {
+    display: flex;
+    align-items: center;
+}
+
+.nav-logo img {
+    height: 40px;
+    width: auto;
 }
 
 /* ===== Hero Section ===== */
@@ -677,9 +686,25 @@ h6 {
 .footer-logo {
     margin-bottom: 24px;
     display: inline-block;
-    padding: 12px;
+    padding: 8px;
+    /* Reduced padding for image */
     background: white;
     border-radius: 50%;
+    width: 64px;
+    /* Fixed width */
+    height: 64px;
+    /* Fixed height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.footer-logo img {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
 }
 
 .footer h4 {
@@ -706,6 +731,13 @@ h6 {
     color: #CCCCCC;
 }
 
+.nav-logo-text {
+    margin-left: 8px;
+    color: var(--accent-primary);
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    margin-left: 8px;
+}
 /* Responsive */
 @media (max-width: 768px) {
     .split-section {
