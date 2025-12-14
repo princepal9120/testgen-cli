@@ -21,7 +21,7 @@ package main
 import (
 	"os"
 
-	"github.com/testgen/testgen/cmd"
+	"github.com/princepal9120/testgen-cli/cmd"
 )
 
 func main() {

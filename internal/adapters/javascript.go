@@ -10,7 +10,7 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/testgen/testgen/pkg/models"
+	"github.com/princepal9120/testgen-cli/pkg/models"
 )
 
 // JavaScriptAdapter handles JavaScript and TypeScript source files

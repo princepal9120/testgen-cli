@@ -19,8 +19,8 @@ TestGen automatically generates production-ready tests for source code across Ja
 
 ```bash
 # Clone the repository
-git clone https://github.com/testgen/testgen.git
-cd testgen
+git clone https://github.com/princepal9120/testgen-cli.git
+cd testgen-cli
 
 # Build
 go build -o testgen .
@@ -188,7 +188,7 @@ jobs:
         with:
           go-version: '1.22'
       - name: Install TestGen
-        run: go install github.com/testgen/testgen@latest
+        run: go install github.com/princepal9120/testgen-cli@latest
       - name: Generate tests
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}

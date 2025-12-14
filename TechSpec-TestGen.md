@@ -1227,7 +1227,7 @@ docker pull testgen:latest
 docker run --rm testgen generate --path=/code
 
 # From source
-go install github.com/testgen/testgen@latest
+go install github.com/princepal9120/testgen-cli@latest
 ```
 
 ---

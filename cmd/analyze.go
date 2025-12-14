@@ -9,7 +9,7 @@ import (
 	"strings"
 
 	"github.com/spf13/cobra"
-	"github.com/testgen/testgen/internal/scanner"
+	"github.com/princepal9120/testgen-cli/internal/scanner"
 )
 
 var (

@@ -3,7 +3,7 @@ package adapters
 import (
 	"sync"
 
-	"github.com/testgen/testgen/internal/scanner"
+	"github.com/princepal9120/testgen-cli/internal/scanner"
 )
 
 // Registry manages language adapters

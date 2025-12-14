@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TestGen - AI-Powered Test Generation CLI</title>
+    <meta name="description"
+        content="Generate production-ready tests for JavaScript, Python, Go, and Rust with AI. Save hours of manual test writing.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span>TestGen</span>
+            </a>
+            <div class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#installation">Install</a>
+                <a href="#usage">Usage</a>
+                <a href="https://github.com/princepal9120/testgen-cli" class="btn btn-outline" target="_blank">GitHub</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-content">
+            <div class="badge">🚀 Now supporting 4 languages</div>
+            <h1>Generate Tests with AI.<br><span class="gradient-text">Ship Faster.</span></h1>
+            <p class="hero-description">
+                TestGen automatically writes production-ready unit tests for your code using Claude or GPT-4.
+                Support for JavaScript, TypeScript, Python, Go, and Rust.
+            </p>
+            <div class="hero-cta">
+                <a href="#installation" class="btn btn-primary">Get Started</a>
+                <a href="#usage" class="btn btn-secondary">See Examples</a>
+            </div>
+            <div class="hero-terminal">
+                <div class="terminal-header">
+                    <span class="terminal-dot red"></span>
+                    <span class="terminal-dot yellow"></span>
+                    <span class="terminal-dot green"></span>
+                    <span class="terminal-title">Terminal</span>
+                </div>
+                <div class="terminal-body">
+                    <code>
+<span class="prompt">$</span> testgen generate --path=./src --recursive --type=unit
+
+<span class="info">INFO</span> Scanning source files...
+<span class="info">INFO</span> Found 24 files across 3 languages
+<span class="info">INFO</span> Generating tests for utils.py
+<span class="success">✓</span> Created tests/test_utils.py (8 tests)
+<span class="info">INFO</span> Generating tests for api.ts
+<span class="success">✓</span> Created src/__tests__/api.test.ts (12 tests)
+<span class="info">INFO</span> Generation complete: 20 tests, $0.12 cost
+                    </code>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2>Why TestGen?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🌍</div>
+                    <h3>Multi-Language</h3>
+                    <p>JavaScript, TypeScript, Python, Go, and Rust. One tool for your entire stack.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🧪</div>
+                    <h3>Multiple Test Types</h3>
+                    <p>Unit tests, edge cases, negative tests, table-driven tests, and integration tests.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔌</div>
+                    <h3>Framework Aware</h3>
+                    <p>Auto-detects Jest, pytest, Go testing, and cargo test. Uses your project's conventions.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💰</div>
+                    <h3>Cost Optimized</h3>
+                    <p>Semantic caching, request batching, and cost estimation before you run.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔧</div>
+                    <h3>CI/CD Ready</h3>
+                    <p>JSON output, meaningful exit codes, and quiet mode for pipelines.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Parallel Processing</h3>
+                    <p>Process multiple files concurrently with configurable worker pools.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Installation Section -->
+    <section id="installation" class="installation">
+        <div class="container">
+            <h2>Installation</h2>
+            <p class="section-subtitle">Get started in 3 simple steps. Works on macOS, Windows, and Linux.</p>
+
+            <!-- OS Tabs -->
+            <div class="os-tabs">
+                <button class="os-tab active" data-os="macos">
+                    <span class="os-icon">🍎</span>
+                    macOS
+                </button>
+                <button class="os-tab" data-os="windows">
+                    <span class="os-icon">🪟</span>
+                    Windows
+                </button>
+                <button class="os-tab" data-os="linux">
+                    <span class="os-icon">🐧</span>
+                    Linux
+                </button>
+            </div>
+
+            <!-- Installation Steps -->
+            <div class="install-flow">
+                <!-- macOS Steps -->
+                <div class="os-content active" id="macos">
+                    <div class="install-steps">
+                        <div class="install-step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h4>Download the Binary</h4>
+                                <p>Get the latest release for your Mac</p>
+                                <div class="code-block">
+                                    <pre><code><span class="comment"># Apple Silicon (M1/M2/M3)</span>
+curl -L https://github.com/princepal9120/testgen-cli/releases/latest/download/testgen-darwin-arm64 -o testgen
+
+<span class="comment"># Intel Mac</span>
+curl -L https://github.com/princepal9120/testgen-cli/releases/latest/download/testgen-darwin-amd64 -o testgen</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="install-step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h4>Make it Executable & Move to PATH</h4>
+                                <p>Add testgen to your system commands</p>
+                                <div class="code-block">
+                                    <pre><code>chmod +x testgen
+sudo mv testgen /usr/local/bin/</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="install-step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h4>Set Your API Key</h4>
+                                <p>Add to your <code>~/.zshrc</code> or <code>~/.bashrc</code></p>
+                                <div class="code-block">
+                                    <pre><code><span class="comment"># Anthropic Claude (recommended)</span>
+export ANTHROPIC_API_KEY="sk-ant-..."
+
+<span class="comment"># Or OpenAI</span>
+export OPENAI_API_KEY="sk-..."</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="install-verify">
+                        <div class="verify-icon">✓</div>
+                        <div class="verify-content">
+                            <h4>Verify Installation</h4>
+                            <div class="code-block code-block-inline">
+                                <pre><code>testgen --version</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Windows Steps -->
+                <div class="os-content" id="windows">
+                    <div class="install-steps">
+                        <div class="install-step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h4>Download the Binary</h4>
+                                <p>Get the Windows executable from releases</p>
+                                <div class="code-block">
+                                    <pre><code><span class="comment"># Using PowerShell</span>
+Invoke-WebRequest -Uri "https://github.com/princepal9120/testgen-cli/releases/latest/download/testgen-windows-amd64.exe" -OutFile "testgen.exe"</code></pre>
+                                </div>
+                                <a href="https://github.com/princepal9120/testgen-cli/releases" class="download-link"
+                                    target="_blank">
+                                    📥 Or download directly from GitHub Releases
+                                </a>
+                            </div>
+                        </div>
+                        <div class="install-step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h4>Add to System PATH</h4>
+                                <p>Move to a folder in your PATH or add a new folder</p>
+                                <div class="code-block">
+                                    <pre><code><span class="comment"># Create a tools folder and add to PATH</span>
+mkdir C:\tools
+move testgen.exe C:\tools\
+
+<span class="comment"># Add to PATH (run as Administrator)</span>
+setx PATH "%PATH%;C:\tools" /M</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="install-step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h4>Set Your API Key</h4>
+                                <p>Set as environment variable</p>
+                                <div class="code-block">
+                                    <pre><code><span class="comment"># PowerShell (current session)</span>
+$env:ANTHROPIC_API_KEY = "sk-ant-..."
+
+<span class="comment"># Or set permanently (run as Administrator)</span>
+setx ANTHROPIC_API_KEY "sk-ant-..." /M</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="install-verify">
+                        <div class="verify-icon">✓</div>
+                        <div class="verify-content">
+                            <h4>Verify Installation</h4>
+                            <div class="code-block code-block-inline">
+                                <pre><code>testgen --version</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Linux Steps -->
+                <div class="os-content" id="linux">
+                    <div class="install-steps">
+                        <div class="install-step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h4>Download the Binary</h4>
+                                <p>Get the latest release for your architecture</p>
+                                <div class="code-block">
+                                    <pre><code><span class="comment"># AMD64 (most systems)</span>
+curl -L https://github.com/princepal9120/testgen-cli/releases/latest/download/testgen-linux-amd64 -o testgen
+
+<span class="comment"># ARM64 (Raspberry Pi, etc)</span>
+curl -L https://github.com/princepal9120/testgen-cli/releases/latest/download/testgen-linux-arm64 -o testgen</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="install-step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h4>Make it Executable & Move to PATH</h4>
+                                <p>Install globally for all users</p>
+                                <div class="code-block">
+                                    <pre><code>chmod +x testgen
+sudo mv testgen /usr/local/bin/</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="install-step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h4>Set Your API Key</h4>
+                                <p>Add to your <code>~/.bashrc</code> or <code>~/.zshrc</code></p>
+                                <div class="code-block">
+                                    <pre><code><span class="comment"># Anthropic Claude (recommended)</span>
+export ANTHROPIC_API_KEY="sk-ant-..."
+
+<span class="comment"># Or OpenAI</span>
+export OPENAI_API_KEY="sk-..."</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="install-verify">
+                        <div class="verify-icon">✓</div>
+                        <div class="verify-content">
+                            <h4>Verify Installation</h4>
+                            <div class="code-block code-block-inline">
+                                <pre><code>testgen --version</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Alternative Install Methods -->
+            <div class="alt-install">
+                <h3>Alternative: Install with Go</h3>
+                <p>If you have Go 1.22+ installed</p>
+                <div class="code-block">
+                    <pre><code>go install github.com/princepal9120/testgen-cli@latest</code></pre>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Usage Section -->
+    <section id="usage" class="usage">
+        <div class="container">
+            <h2>Usage Examples</h2>
+            <div class="usage-tabs">
+                <button class="tab-btn active" data-tab="generate">Generate</button>
+                <button class="tab-btn" data-tab="analyze">Analyze</button>
+                <button class="tab-btn" data-tab="validate">Validate</button>
+            </div>
+
+            <div class="tab-content active" id="generate">
+                <div class="example-grid">
+                    <div class="example">
+                        <h4>Single File</h4>
+                        <div class="code-block">
+                            <pre><code>testgen generate --file=./src/utils.py --type=unit</code></pre>
+                        </div>
+                    </div>
+                    <div class="example">
+                        <h4>Entire Directory</h4>
+                        <div class="code-block">
+                            <pre><code>testgen generate --path=./src --recursive --type=unit,edge-cases</code></pre>
+                        </div>
+                    </div>
+                    <div class="example">
+                        <h4>Dry Run (Preview)</h4>
+                        <div class="code-block">
+                            <pre><code>testgen generate --path=./src --dry-run --output-format=json</code></pre>
+                        </div>
+                    </div>
+                    <div class="example">
+                        <h4>With Validation</h4>
+                        <div class="code-block">
+                            <pre><code>testgen generate --path=./src --validate --parallel=4</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="analyze">
+                <div class="example-grid">
+                    <div class="example">
+                        <h4>Cost Estimation</h4>
+                        <div class="code-block">
+                            <pre><code>testgen analyze --path=./src --cost-estimate
+
+<span class="output">=== Codebase Analysis ===
+Total files:     24
+Total lines:     3,456
+Est. functions:  89
+
+Estimated tokens: 45,000
+Estimated cost:   $0.38 USD</span></code></pre>
+                        </div>
+                    </div>
+                    <div class="example">
+                        <h4>Per-File Breakdown</h4>
+                        <div class="code-block">
+                            <pre><code>testgen analyze --path=./src --detail=per-file --output-format=json</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="validate">
+                <div class="example-grid">
+                    <div class="example">
+                        <h4>Check Coverage</h4>
+                        <div class="code-block">
+                            <pre><code>testgen validate --path=./src --min-coverage=80</code></pre>
+                        </div>
+                    </div>
+                    <div class="example">
+                        <h4>CI Pipeline</h4>
+                        <div class="code-block">
+                            <pre><code>testgen validate --path=./src --fail-on-missing-tests --quiet</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Languages Section -->
+    <section class="languages">
+        <div class="container">
+            <h2>Supported Languages</h2>
+            <div class="lang-grid">
+                <div class="lang-card">
+                    <div class="lang-icon">🟨</div>
+                    <h4>JavaScript / TypeScript</h4>
+                    <p>Jest, Vitest, Mocha</p>
+                </div>
+                <div class="lang-card">
+                    <div class="lang-icon">🐍</div>
+                    <h4>Python</h4>
+                    <p>pytest, unittest</p>
+                </div>
+                <div class="lang-card">
+                    <div class="lang-icon">🐹</div>
+                    <h4>Go</h4>
+                    <p>testing + testify</p>
+                </div>
+                <div class="lang-card">
+                    <div class="lang-icon">🦀</div>
+                    <h4>Rust</h4>
+                    <p>cargo test</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <h2>Ready to automate your testing?</h2>
+            <p>Start generating tests in minutes. Free to use with your own API key.</p>
+            <div class="cta-buttons">
+                <a href="#installation" class="btn btn-primary btn-lg">Install TestGen</a>
+                <a href="https://github.com/princepal9120/testgen-cli" class="btn btn-outline btn-lg" target="_blank">View on
+                    GitHub</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <span class="logo-icon">⚡</span>
+                    <span>TestGen</span>
+                </div>
+                <div class="footer-links">
+                    <a href="https://github.com/princepal9120/testgen-cli">GitHub</a>
+                    <a href="https://github.com/princepal9120/testgen-cli/blob/main/docs/CLI_REFERENCE.md">Docs</a>
+                    <a href="https://github.com/princepal9120/testgen-cli/issues">Issues</a>
+                </div>
+            </div>
+            <p class="footer-copyright">Built with ❤️ for developers. Apache 2.0 License.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

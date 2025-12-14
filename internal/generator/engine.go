@@ -17,9 +17,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/testgen/testgen/internal/adapters"
-	"github.com/testgen/testgen/internal/llm"
-	"github.com/testgen/testgen/pkg/models"
+	"github.com/princepal9120/testgen-cli/internal/adapters"
+	"github.com/princepal9120/testgen-cli/internal/llm"
+	"github.com/princepal9120/testgen-cli/pkg/models"
 )
 
 // EngineConfig contains configuration for the generation engine

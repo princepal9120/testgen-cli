@@ -1,4 +1,4 @@
-module github.com/testgen/testgen
+module github.com/princepal9120/testgen-cli
 
 go 1.22
 

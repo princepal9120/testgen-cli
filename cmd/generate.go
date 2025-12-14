@@ -11,10 +11,10 @@ import (
 
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
-	"github.com/testgen/testgen/internal/adapters"
-	"github.com/testgen/testgen/internal/generator"
-	"github.com/testgen/testgen/internal/scanner"
-	"github.com/testgen/testgen/pkg/models"
+	"github.com/princepal9120/testgen-cli/internal/adapters"
+	"github.com/princepal9120/testgen-cli/internal/generator"
+	"github.com/princepal9120/testgen-cli/internal/scanner"
+	"github.com/princepal9120/testgen-cli/pkg/models"
 )
 
 var (

@@ -9,7 +9,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/testgen/testgen/pkg/models"
+	"github.com/princepal9120/testgen-cli/pkg/models"
 )
 
 // Options configures the scanner behavior

@@ -7,7 +7,7 @@ handling parsing, framework selection, test generation, and validation.
 package adapters
 
 import (
-	"github.com/testgen/testgen/pkg/models"
+	"github.com/princepal9120/testgen-cli/pkg/models"
 )
 
 // LanguageAdapter defines the interface for language-specific test generation

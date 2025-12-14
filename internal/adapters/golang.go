@@ -9,7 +9,7 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/testgen/testgen/pkg/models"
+	"github.com/princepal9120/testgen-cli/pkg/models"
 )
 
 // GoAdapter handles Go source files

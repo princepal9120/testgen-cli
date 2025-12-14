@@ -4,8 +4,8 @@ import (
 	"context"
 	"sync"
 
-	"github.com/testgen/testgen/internal/adapters"
-	"github.com/testgen/testgen/pkg/models"
+	"github.com/princepal9120/testgen-cli/internal/adapters"
+	"github.com/princepal9120/testgen-cli/pkg/models"
 )
 
 // WorkerPool manages parallel test generation

@@ -4,7 +4,7 @@ Package validation provides test validation and execution functionality.
 package validation
 
 import (
-	"github.com/testgen/testgen/pkg/models"
+	"github.com/princepal9120/testgen-cli/pkg/models"
 )
 
 // Config contains validation configuration
