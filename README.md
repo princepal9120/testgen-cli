@@ -1,13 +1,18 @@
 # TestGen
 
+<p align="center">
+  <img src="website/images/logo.png" alt="TestGen Logo" width="120" />
+</p>
+
 **AI-Powered Multi-Language Test Generation CLI**
 
 TestGen automatically generates production-ready tests for source code across JavaScript/TypeScript, Python, Go, and Rust using LLM APIs (Anthropic Claude, OpenAI GPT, Google Gemini, Groq).
 
 ## Features
 
+- 🖥️ **Interactive TUI Mode**: Full terminal UI with visual forms and live progress
 - 🌍 **Multi-Language Support**: JavaScript/TypeScript, Python, Go, Rust
-- 🧪 **Multiple Test Types**: Unit, edge-cases, negative, table-driven, integrationble-driven, integration
+- 🧪 **Multiple Test Types**: Unit, edge-cases, negative, table-driven, integration
 - 🔌 **Framework Aware**: Jest, Vitest, pytest, Go testing, cargo test
 - 💰 **Cost Optimized**: Semantic caching, request batching
 - 🔧 **CI/CD Ready**: JSON output, meaningful exit codes, quiet mode
@@ -45,6 +50,11 @@ export GEMINI_API_KEY="your-api-key"       # Google Gemini
 # or
 export GROQ_API_KEY="your-api-key"         # Groq (fastest, cheapest)
 
+# Launch interactive TUI mode
+testgen tui
+
+# Or use CLI commands directly:
+
 # Generate tests for a single file
 testgen generate --file=./src/utils.py --type=unit
 
@@ -59,6 +69,31 @@ testgen analyze --path=./src --cost-estimate
 ```
 
 ## Commands
+
+### `testgen tui`
+
+Launch the interactive Terminal User Interface.
+
+```bash
+testgen tui
+```
+
+**Features:**
+- Visual home screen to choose actions
+- Interactive config forms (path, types, parallel, dry-run, validate)
+- Command preview before execution
+- Live progress with spinner and file-by-file updates
+- Results summary with generated file paths
+
+**Controls:**
+| Key | Action |
+|-----|--------|
+| Tab / Shift+Tab | Navigate fields |
+| Space | Toggle options |
+| Enter | Confirm / Select |
+| Esc | Go back |
+| q / Ctrl+C | Quit |
+| Ctrl+X | Cancel operation |
 
 ### `testgen generate`
 
@@ -169,8 +204,6 @@ languages:
 |----------|------------|-------------------|------------|
 | JavaScript/TypeScript | `.js`, `.ts`, `.jsx`, `.tsx` | Jest | unit, edge-cases, negative |
 | Python | `.py` | pytest | unit, edge-cases, negative |
-| Go | `.go` | testing + testify | unit, table-driven, edge-cases, negative |
-| Rust | `.rs` | cargo test | unit, edge-cases, negative |
 | Go | `.go` | testing + testify | unit, table-driven, edge-cases, negative |
 | Rust | `.rs` | cargo test | unit, edge-cases, negative |
 

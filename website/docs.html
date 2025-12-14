@@ -44,6 +44,7 @@
             <div class="sidebar-group">
                 <h3>Usage</h3>
                 <ul>
+                    <li><a href="#tui-mode">TUI Mode</a></li>
                     <li><a href="#generating-tests">Generating Tests</a></li>
                     <li><a href="#supported-languages">Supported Languages</a></li>
                 </ul>
@@ -116,6 +117,44 @@ export ANTHROPIC_API_KEY="sk-ant-..."
 
 # Or for OpenAI
 export OPENAI_API_KEY="sk-..."</code></pre>
+                </div>
+            </section>
+
+            <section id="tui-mode">
+                <h2>TUI Mode ✨</h2>
+                <p>TestGen includes a full interactive Terminal User Interface (TUI) for a visual, keyboard-driven
+                    experience.</p>
+
+                <h3>Launch TUI</h3>
+                <div class="code-block">
+                    <pre><code>testgen tui</code></pre>
+                </div>
+
+                <h3>Features</h3>
+                <ul>
+                    <li><strong>Home Screen:</strong> Choose between Generate Tests or Analyze Codebase</li>
+                    <li><strong>Config Forms:</strong> Interactive forms for all options (path, types, parallel, etc.)
+                    </li>
+                    <li><strong>Command Preview:</strong> See the exact CLI command before running</li>
+                    <li><strong>Live Progress:</strong> Spinner and progress updates during generation</li>
+                    <li><strong>Results Summary:</strong> Beautiful summary with stats and generated file paths</li>
+                </ul>
+
+                <h3>Keyboard Controls</h3>
+                <div class="code-block">
+                    <pre><code>Tab / Shift+Tab    Navigate between fields
+Space              Toggle checkboxes
+Enter              Confirm / Select
+Esc                Go back
+q / Ctrl+C         Quit
+Ctrl+X             Cancel running operation</code></pre>
+                </div>
+
+                <h3>Screen Flow</h3>
+                <div class="code-block">
+                    <pre><code>Home → Config → Preview → Running → Results
+  ↑                                    │
+  └────────────────────────────────────┘</code></pre>
                 </div>
             </section>
 

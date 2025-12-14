@@ -1,0 +1,77 @@
+# ========================
+# Go build artifacts
+# ========================
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+
+# Binaries
+/bin/
+/dist/
+/build/
+
+# Go workspace file (Go 1.18+)
+go.work
+go.work.sum
+
+# ========================
+# Dependency directories
+# ========================
+vendor/
+
+# ========================
+# IDE / Editor files
+# ========================
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ========================
+# OS files
+# ========================
+.DS_Store
+Thumbs.db
+
+# ========================
+# Logs & runtime data
+# ========================
+*.log
+logs/
+tmp/
+temp/
+
+# ========================
+# Environment variables
+# ========================
+.env
+.env.*
+!.env.example
+
+# ========================
+# Coverage & profiling
+# ========================
+coverage.out
+coverage.html
+*.cover
+*.prof
+*.pprof
+
+# ========================
+# Test cache
+# ========================
+.test/
+# CLI output
+*.txt
+*.json
+
+# Cobra generated docs
+docs/
+
+# Docker
+docker-compose.override.yml

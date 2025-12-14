@@ -14,6 +14,7 @@ import (
 	"github.com/princepal9120/testgen-cli/internal/adapters"
 	"github.com/princepal9120/testgen-cli/internal/generator"
 	"github.com/princepal9120/testgen-cli/internal/scanner"
+	"github.com/princepal9120/testgen-cli/internal/ui"
 	"github.com/princepal9120/testgen-cli/pkg/models"
 )
 
@@ -33,6 +34,7 @@ var (
 	genExcludePattern string
 	genBatchSize      int
 	genReportUsage    bool
+	genInteractive    bool
 )
 
 // generateCmd represents the generate command
@@ -96,6 +98,9 @@ func init() {
 	// Reporting
 	generateCmd.Flags().BoolVar(&genReportUsage, "report-usage", false, "generate usage/cost report")
 
+	// Interactive mode
+	generateCmd.Flags().BoolVarP(&genInteractive, "interactive", "i", false, "show interactive results view after generation")
+
 	// Bind to viper
 	viper.BindPFlag("generation.parallel_workers", generateCmd.Flags().Lookup("parallel"))
 	viper.BindPFlag("generation.batch_size", generateCmd.Flags().Lookup("batch-size"))
@@ -107,6 +112,17 @@ func runGenerate(cmd *cobra.Command, args []string) error {
 	// Validate inputs
 	if genPath == "" && genFile == "" {
 		return fmt.Errorf("either --path or --file is required")
+	}
+
+	// Check API key early (non-quiet mode shows helpful error)
+	provider := viper.GetString("llm.provider")
+	if provider == "" {
+		provider = "anthropic" // default
+	}
+	apiKey := getAPIKeyForProvider(provider)
+	if apiKey == "" && !quiet && genOutputFormat != "json" {
+		ui.ShowAPIKeyError(provider)
+		return fmt.Errorf("API key not configured for %s", provider)
 	}
 
 	// Determine target path
@@ -171,6 +187,7 @@ func runGenerate(cmd *cobra.Command, args []string) error {
 		Framework:   genFramework,
 		BatchSize:   genBatchSize,
 		Parallelism: genParallel,
+		Provider:    viper.GetString("llm.provider"),
 	})
 	if err != nil {
 		return fmt.Errorf("failed to initialize generator: %w", err)
@@ -178,6 +195,12 @@ func runGenerate(cmd *cobra.Command, args []string) error {
 
 	// Process files
 	results := processFiles(sourceFiles, engine, log)
+
+	// Show interactive results or text output
+	if genInteractive && !genDryRun && genOutputFormat != "json" {
+		log.Info("generation complete", slog.Int("files", len(results)))
+		return ui.ShowResults(results)
+	}
 
 	// Output results
 	if err := outputResults(results, genOutputFormat, genDryRun); err != nil {
@@ -201,6 +224,28 @@ func runGenerate(cmd *cobra.Command, args []string) error {
 		slog.Int("total", len(results)),
 	)
 
+	// Show TUI banner (non-quiet, non-json mode)
+	if !quiet && genOutputFormat != "json" {
+		if errorCount > 0 {
+			ui.ShowError(
+				fmt.Sprintf("%d file(s) failed to generate tests", errorCount),
+				"Run with --verbose for details",
+			)
+			return fmt.Errorf("%d file(s) failed to generate tests", errorCount)
+		}
+
+		funcsCount := 0
+		for _, r := range results {
+			funcsCount += len(r.FunctionsTested)
+		}
+		ui.ShowSuccess(ui.SuccessStats{
+			FilesProcessed: len(results),
+			TestsGenerated: successCount,
+			FunctionsFound: funcsCount,
+		})
+		return nil
+	}
+
 	if errorCount > 0 {
 		return fmt.Errorf("%d file(s) failed to generate tests", errorCount)
 	}
@@ -215,8 +260,15 @@ func processFiles(files []*models.SourceFile, engine *generator.Engine, log *slo
 	// Get adapter registry
 	registry := adapters.DefaultRegistry()
 
+	// Start spinner for interactive mode
+	var spinner *ui.StatusSpinner
+	if !quiet && genOutputFormat != "json" {
+		spinner = ui.NewStatusSpinner(fmt.Sprintf("Generating tests for %d file(s)...", len(files)))
+		spinner.Start()
+	}
+
 	// Process files (parallel processing will be added later)
-	for _, file := range files {
+	for i, file := range files {
 		log.Debug("processing file", slog.String("path", file.Path), slog.String("language", file.Language))
 
 		// Get appropriate adapter
@@ -246,6 +298,16 @@ func processFiles(files []*models.SourceFile, engine *generator.Engine, log *slo
 		mu.Lock()
 		results = append(results, result)
 		mu.Unlock()
+
+		// Update status for non-quiet mode
+		if !quiet && genOutputFormat != "json" {
+			fmt.Printf("\r  ✓ [%d/%d] %s\n", i+1, len(files), filepath.Base(file.Path))
+		}
+	}
+
+	// Stop spinner
+	if spinner != nil {
+		spinner.Stop()
 	}
 
 	return results
@@ -299,4 +361,23 @@ func outputText(results []*models.GenerationResult, dryRun bool) error {
 		}
 	}
 	return nil
+}
+
+func getAPIKeyForProvider(provider string) string {
+	switch strings.ToLower(provider) {
+	case "openai":
+		return os.Getenv("OPENAI_API_KEY")
+	case "anthropic":
+		return os.Getenv("ANTHROPIC_API_KEY")
+	case "gemini":
+		key := os.Getenv("GEMINI_API_KEY")
+		if key == "" {
+			key = os.Getenv("GOOGLE_API_KEY")
+		}
+		return key
+	case "groq":
+		return os.Getenv("GROQ_API_KEY")
+	default:
+		return ""
+	}
 }

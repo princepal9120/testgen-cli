@@ -1,0 +1,14 @@
+llm:
+  provider: groq
+  model: llama-3.3-70b-versatile
+  temperature: 0.3
+  max_tokens: 4096
+
+generation:
+  batch_size: 5
+  parallel_workers: 2
+  timeout_seconds: 30
+
+output:
+  format: text
+  include_coverage: true

@@ -2,25 +2,31 @@
 
 ## Overview
 
-TestGen follows **Clean Architecture** principles with clear separation between CLI, business logic, and external services.
+TestGen follows **Clean Architecture** principles with clear separation between CLI/TUI, business logic, and external services.
 
 ```
 ┌─────────────────────────────────────────────────────┐
-│                    CLI Layer (cmd/)                  │
-│         Cobra commands, flags, user I/O             │
-└──────────────────────┬──────────────────────────────┘
-                        │
-┌──────────────────────▼──────────────────────────────┐
+│               Presentation Layer                     │
+│  ┌─────────────────────┐  ┌─────────────────────┐   │
+│  │   CLI (cmd/)        │  │   TUI (internal/    │   │
+│  │   Cobra commands    │  │   ui/tui/)          │   │
+│  │   flags, user I/O   │  │   Bubble Tea models │   │
+│  └──────────┬──────────┘  └──────────┬──────────┘   │
+└─────────────┼────────────────────────┼──────────────┘
+              │                        │
+              └───────────┬────────────┘
+                          ▼
+┌─────────────────────────────────────────────────────┐
 │              Core Engine (internal/generator/)       │
 │         Orchestrates adapters, LLM, output          │
 └──────────────────────┬──────────────────────────────┘
-                        │
-        ┌──────────────┼──────────────┐
-        ▼              ▼              ▼
-┌───────────┐  ┌───────────┐  ┌───────────┐
-│  Scanner  │  │  Adapters │  │    LLM    │
-│(internal/)│  │(internal/)│  │(internal/)│
-└───────────┘  └───────────┘  └───────────┘
+                       │
+       ┌───────────────┼───────────────┐
+       ▼               ▼               ▼
+┌───────────┐   ┌───────────┐   ┌───────────┐
+│  Scanner  │   │  Adapters │   │    LLM    │
+│(internal/)│   │(internal/)│   │(internal/)│
+└───────────┘   └───────────┘   └───────────┘
 ```
 
 ---
@@ -32,6 +38,16 @@ TestGen follows **Clean Architecture** principles with clear separation between 
 - Flag parsing and validation
 - Calls `internal/` packages
 - **No business logic**
+
+### `internal/ui/tui/`
+- Bubble Tea TUI application
+- Screen models (Home, Config, Preview, Running, Results)
+- State machine for navigation
+- Uses lipgloss for styling
+
+### `internal/ui/`
+- Shared UI components (spinner, banner, progress)
+- Style definitions
 
 ### `internal/scanner/`
 - File discovery
