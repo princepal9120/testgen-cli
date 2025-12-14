@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation - TestGen</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="docs-page">
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="docs.html" class="active">Docs</a>
+                <a href="https://github.com/princepal9120/testgen-cli" target="_blank">GitHub</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container docs-container">
+        <!-- Sidebar -->
+        <aside class="docs-sidebar">
+            <div class="sidebar-group">
+                <h3>Getting Started</h3>
+                <ul>
+                    <li><a href="#introduction" class="active">Introduction</a></li>
+                    <li><a href="#installation">Installation</a></li>
+                    <li><a href="#configuration">Configuration</a></li>
+                </ul>
+            </div>
+            <div class="sidebar-group">
+                <h3>Usage</h3>
+                <ul>
+                    <li><a href="#generating-tests">Generating Tests</a></li>
+                    <li><a href="#supported-languages">Supported Languages</a></li>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="docs-content">
+            <section id="introduction">
+                <h1>Documentation</h1>
+                <p>TestGen is an AI-powered CLI tool that automatically generates production-ready unit tests for your
+                    code. It supports JavaScript, TypeScript, Python, Go, and Rust.</p>
+            </section>
+
+            <section id="installation">
+                <h2>Installation</h2>
+                <p>TestGen is available as a standalone binary for macOS, Windows, and Linux.</p>
+
+                <!-- Tabs -->
+                <div class="docs-tabs">
+                    <button class="docs-tab active" onclick="switchTab('macos')">macOS</button>
+                    <button class="docs-tab" onclick="switchTab('windows')">Windows</button>
+                    <button class="docs-tab" onclick="switchTab('linux')">Linux</button>
+                </div>
+
+                <div id="macos" class="tab-content active">
+                    <h3>macOS</h3>
+                    <p>Install via curl:</p>
+                    <div class="code-block">
+                        <pre><code># Apple Silicon
+curl -L https://github.com/princepal9120/testgen-cli/releases/latest/download/testgen-darwin-arm64 -o testgen
+
+# Intel
+curl -L https://github.com/princepal9120/testgen-cli/releases/latest/download/testgen-darwin-amd64 -o testgen
+
+chmod +x testgen
+sudo mv testgen /usr/local/bin/</code></pre>
+                    </div>
+                </div>
+
+                <div id="windows" class="tab-content">
+                    <h3>Windows</h3>
+                    <p>Download the executable via PowerShell:</p>
+                    <div class="code-block">
+                        <pre><code>Invoke-WebRequest -Uri "https://github.com/princepal9120/testgen-cli/releases/latest/download/testgen-windows-amd64.exe" -OutFile "testgen.exe"
+
+# Move to a folder in your PATH, e.g. C:\tools
+move testgen.exe C:\tools\</code></pre>
+                    </div>
+                </div>
+
+                <div id="linux" class="tab-content">
+                    <h3>Linux</h3>
+                    <p>Install via curl:</p>
+                    <div class="code-block">
+                        <pre><code>curl -L https://github.com/princepal9120/testgen-cli/releases/latest/download/testgen-linux-amd64 -o testgen
+chmod +x testgen
+sudo mv testgen /usr/local/bin/</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section id="configuration">
+                <h2>Configuration</h2>
+                <p>You need an API key from Anthropic (recommended) or OpenAI to use TestGen.</p>
+
+                <div class="code-block">
+                    <pre><code># Add to your ~/.zshrc or ~/.bashrc
+export ANTHROPIC_API_KEY="sk-ant-..."
+
+# Or for OpenAI
+export OPENAI_API_KEY="sk-..."</code></pre>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-logo">⚡</div>
+            <p>TestGen CLI - Documentation</p>
+        </div>
+    </footer>
+
+    <script>
+        function switchTab(os) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(el => el.style.display = 'none');
+            document.querySelectorAll('.docs-tab').forEach(el => el.classList.remove('active'));
+
+            // Show selected
+            document.getElementById(os).style.display = 'block';
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+
+</html>
