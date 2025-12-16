@@ -29,7 +29,7 @@ def greet(name: str, age: int = 20) -> str:
 		ast, err := adapter.ParseFile(code)
 		assert.NoError(t, err)
 		assert.Len(t, ast.Definitions, 1)
-		
+
 		def := ast.Definitions[0]
 		assert.Equal(t, "greet", def.Name)
 		assert.Equal(t, "str", def.ReturnType)
@@ -46,7 +46,7 @@ class Calculator:
 `
 		ast, err := adapter.ParseFile(code)
 		assert.NoError(t, err)
-		
+
 		// Should find 1 definition (the method)
 		assert.Len(t, ast.Definitions, 1)
 		def := ast.Definitions[0]
@@ -58,13 +58,13 @@ class Calculator:
 
 func TestPythonAdapter_GetPromptTemplate(t *testing.T) {
 	adapter := NewPythonAdapter()
-	
+
 	t.Run("Unit test prompt", func(t *testing.T) {
 		prompt := adapter.GetPromptTemplate("unit")
 		assert.Contains(t, prompt, "Generate idiomatic Python tests")
 		assert.Contains(t, prompt, "pytest")
 	})
-	
+
 	t.Run("Edge cases prompt", func(t *testing.T) {
 		prompt := adapter.GetPromptTemplate("edge-cases")
 		assert.Contains(t, prompt, "Focus on edge cases")
@@ -73,11 +73,11 @@ func TestPythonAdapter_GetPromptTemplate(t *testing.T) {
 
 func TestPythonAdapter_GenerateTestPath(t *testing.T) {
 	adapter := NewPythonAdapter()
-	
+
 	path := adapter.GenerateTestPath("/src/app/utils.py", "")
 	// Expect ../tests/test_utils.py relative to file
 	assert.Contains(t, path, "tests/test_utils.py")
-	
+
 	pathWithOutDir := adapter.GenerateTestPath("/src/app/utils.py", "/tmp/tests")
 	assert.Equal(t, "/tmp/tests/test_utils.py", pathWithOutDir)
 }

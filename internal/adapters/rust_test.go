@@ -30,7 +30,7 @@ pub async fn fetch_data() -> Result<String, Error> {
 		ast, err := adapter.ParseFile(code)
 		assert.NoError(t, err)
 		assert.Len(t, ast.Definitions, 1)
-		
+
 		def := ast.Definitions[0]
 		assert.Equal(t, "fetch_data", def.Name)
 		assert.Contains(t, def.Signature, "async")
@@ -48,7 +48,7 @@ impl User {
 		ast, err := adapter.ParseFile(code)
 		assert.NoError(t, err)
 		assert.Len(t, ast.Definitions, 1)
-		
+
 		def := ast.Definitions[0]
 		assert.Equal(t, "new", def.Name)
 		assert.True(t, def.IsMethod)
@@ -58,7 +58,7 @@ impl User {
 
 func TestRustAdapter_GetPromptTemplate(t *testing.T) {
 	adapter := NewRustAdapter()
-	
+
 	prompt := adapter.GetPromptTemplate("unit")
 	assert.Contains(t, prompt, "idiomatic Rust tests")
 	assert.Contains(t, prompt, "#[cfg(test)]")
@@ -66,11 +66,11 @@ func TestRustAdapter_GetPromptTemplate(t *testing.T) {
 
 func TestRustAdapter_GenerateTestPath(t *testing.T) {
 	adapter := NewRustAdapter()
-	
+
 	// Inline tests (default behavior if no tests dir)
 	path := adapter.GenerateTestPath("/src/lib.rs", "")
 	assert.Contains(t, path, "lib.rs.test") // This is our fallback
-	
+
 	// Explicit output dir
 	pathWithDir := adapter.GenerateTestPath("/src/lib.rs", "/tests")
 	assert.Equal(t, "/tests/lib_test.rs", pathWithDir)

@@ -8,8 +8,8 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/spf13/cobra"
 	"github.com/princepal9120/testgen-cli/internal/scanner"
+	"github.com/spf13/cobra"
 )
 
 var (
@@ -56,14 +56,14 @@ func init() {
 }
 
 type AnalysisResult struct {
-	Path            string                `json:"path"`
-	TotalFiles      int                   `json:"total_files"`
-	TotalFunctions  int                   `json:"total_functions"`
-	TotalLines      int                   `json:"total_lines"`
-	ByLanguage      map[string]LangStats  `json:"by_language"`
-	EstimatedTokens int                   `json:"estimated_tokens,omitempty"`
-	EstimatedCost   float64               `json:"estimated_cost_usd,omitempty"`
-	Files           []FileAnalysis        `json:"files,omitempty"`
+	Path            string               `json:"path"`
+	TotalFiles      int                  `json:"total_files"`
+	TotalFunctions  int                  `json:"total_functions"`
+	TotalLines      int                  `json:"total_lines"`
+	ByLanguage      map[string]LangStats `json:"by_language"`
+	EstimatedTokens int                  `json:"estimated_tokens,omitempty"`
+	EstimatedCost   float64              `json:"estimated_cost_usd,omitempty"`
+	Files           []FileAnalysis       `json:"files,omitempty"`
 }
 
 type LangStats struct {
@@ -166,13 +166,13 @@ func estimateCosts(result *AnalysisResult) {
 	// - Source code: ~50 tokens per function for context
 	// - Generated test: ~100 tokens per function
 	// - System prompt overhead: ~500 tokens per request
-	
-	tokensPerFunction := 150  // input context
-	outputPerFunction := 200  // generated test
+
+	tokensPerFunction := 150 // input context
+	outputPerFunction := 200 // generated test
 	batchSize := 5
 	systemPromptTokens := 500
 
-	totalInputTokens := (result.TotalFunctions * tokensPerFunction) + 
+	totalInputTokens := (result.TotalFunctions * tokensPerFunction) +
 		((result.TotalFunctions / batchSize) * systemPromptTokens)
 	totalOutputTokens := result.TotalFunctions * outputPerFunction
 

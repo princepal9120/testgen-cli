@@ -96,12 +96,12 @@ func (c *Cache) Stats() (size int, hits int, misses int, hitRate float64) {
 	size = len(c.entries)
 	hits = c.hits
 	misses = c.misses
-	
+
 	total := hits + misses
 	if total > 0 {
 		hitRate = float64(hits) / float64(total)
 	}
-	
+
 	return
 }
 

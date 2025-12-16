@@ -8,19 +8,19 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/spf13/cobra"
 	"github.com/princepal9120/testgen-cli/internal/scanner"
 	"github.com/princepal9120/testgen-cli/internal/validation"
+	"github.com/spf13/cobra"
 )
 
 var (
 	// validate command flags
-	valPath            string
-	valRecursive       bool
-	valMinCoverage     float64
-	valFailOnMissing   bool
-	valReportGaps      bool
-	valOutputFormat    string
+	valPath          string
+	valRecursive     bool
+	valMinCoverage   float64
+	valFailOnMissing bool
+	valReportGaps    bool
+	valOutputFormat  string
 )
 
 // validateCmd represents the validate command
@@ -88,9 +88,9 @@ func runValidate(cmd *cobra.Command, args []string) error {
 
 	// Create validator
 	validator := validation.NewValidator(validation.Config{
-		MinCoverage:    valMinCoverage,
-		FailOnMissing:  valFailOnMissing,
-		ReportGaps:     valReportGaps,
+		MinCoverage:   valMinCoverage,
+		FailOnMissing: valFailOnMissing,
+		ReportGaps:    valReportGaps,
 	})
 
 	// Run validation

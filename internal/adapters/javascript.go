@@ -434,9 +434,9 @@ func (a *JavaScriptAdapter) RunTests(testDir string) (*models.TestResults, error
 
 	// Try to parse Jest JSON output
 	var jestOutput struct {
-		NumPassedTests  int `json:"numPassedTests"`
-		NumFailedTests  int `json:"numFailedTests"`
-		NumTotalTests   int `json:"numTotalTests"`
+		NumPassedTests int `json:"numPassedTests"`
+		NumFailedTests int `json:"numFailedTests"`
+		NumTotalTests  int `json:"numTotalTests"`
 	}
 
 	if json.Unmarshal(output, &jestOutput) == nil {

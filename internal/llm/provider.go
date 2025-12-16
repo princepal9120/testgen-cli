@@ -71,10 +71,10 @@ type CompletionResponse struct {
 
 // UsageMetrics tracks API usage
 type UsageMetrics struct {
-	TotalRequests   int
-	TotalTokensIn   int
-	TotalTokensOut  int
-	CachedTokens    int
+	TotalRequests    int
+	TotalTokensIn    int
+	TotalTokensOut   int
+	CachedTokens     int
 	EstimatedCostUSD float64
 }
 

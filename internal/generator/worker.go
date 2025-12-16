@@ -10,12 +10,12 @@ import (
 
 // WorkerPool manages parallel test generation
 type WorkerPool struct {
-	workers    int
-	jobs       chan job
-	results    chan *models.GenerationResult
-	wg         sync.WaitGroup
-	engine     *Engine
-	registry   *adapters.Registry
+	workers  int
+	jobs     chan job
+	results  chan *models.GenerationResult
+	wg       sync.WaitGroup
+	engine   *Engine
+	registry *adapters.Registry
 }
 
 type job struct {

@@ -62,10 +62,10 @@ func (a *PythonAdapter) ParseFile(content string) (*models.AST, error) {
 	// Extract function definitions
 	// Pattern: def function_name(params):
 	funcRegex := regexp.MustCompile(`^(\s*)def\s+(\w+)\s*\(([^)]*)\)\s*(?:->\s*([^:]+))?\s*:`)
-	
+
 	// Extract class definitions for context
 	classRegex := regexp.MustCompile(`^class\s+(\w+)`)
-	
+
 	var currentClass string
 	var currentIndent int
 
@@ -80,7 +80,7 @@ func (a *PythonAdapter) ParseFile(content string) (*models.AST, error) {
 		// Check for function definition
 		if matches := funcRegex.FindStringSubmatch(line); matches != nil {
 			indent := len(matches[1])
-			
+
 			def := &models.Definition{
 				Name:      matches[2],
 				StartLine: i + 1,

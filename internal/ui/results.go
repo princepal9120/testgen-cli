@@ -128,7 +128,7 @@ func (m ResultsModel) renderResultLine(r *models.GenerationResult, idx int) stri
 
 	// Filename
 	name := filepath.Base(r.SourceFile.Path)
-	
+
 	// Layout
 	content := fmt.Sprintf("%s  %s", bullet, name)
 

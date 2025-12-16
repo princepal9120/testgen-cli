@@ -44,7 +44,7 @@ async function fetchData() {
 		assert.Len(t, ast.Definitions, 1)
 		assert.Equal(t, "fetchData", ast.Definitions[0].Name)
 	})
-	
+
 	t.Run("Parse class method", func(t *testing.T) {
 		code := `
 class User {
@@ -61,7 +61,7 @@ class User {
 		assert.NoError(t, err)
 		// Should find getName (constructor skipping depends on impl, but let's check what we find)
 		// Our regex finds methods inside classes
-		
+
 		found := false
 		for _, def := range ast.Definitions {
 			if def.Name == "getName" {
@@ -76,7 +76,7 @@ class User {
 
 func TestJavaScriptAdapter_GetPromptTemplate(t *testing.T) {
 	adapter := NewJavaScriptAdapter()
-	
+
 	prompt := adapter.GetPromptTemplate("unit")
 	assert.Contains(t, prompt, "idiomatic JavaScript/TypeScript tests")
 	assert.Contains(t, prompt, "Jest")
@@ -84,11 +84,11 @@ func TestJavaScriptAdapter_GetPromptTemplate(t *testing.T) {
 
 func TestJavaScriptAdapter_GenerateTestPath(t *testing.T) {
 	adapter := NewJavaScriptAdapter()
-	
+
 	// JS file
 	path := adapter.GenerateTestPath("/src/utils.js", "")
 	assert.Contains(t, path, "utils.test.js")
-	
+
 	// TS file
 	pathTS := adapter.GenerateTestPath("/src/components/Button.tsx", "")
 	assert.Contains(t, pathTS, "Button.test.tsx")

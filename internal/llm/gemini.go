@@ -66,9 +66,9 @@ func (p *GeminiProvider) Configure(config ProviderConfig) error {
 
 // geminiRequest represents the Gemini API request
 type geminiRequest struct {
-	Contents         []geminiContent        `json:"contents"`
-	SystemInstruction *geminiContent        `json:"systemInstruction,omitempty"`
-	GenerationConfig geminiGenerationConfig `json:"generationConfig,omitempty"`
+	Contents          []geminiContent        `json:"contents"`
+	SystemInstruction *geminiContent         `json:"systemInstruction,omitempty"`
+	GenerationConfig  geminiGenerationConfig `json:"generationConfig,omitempty"`
 }
 
 type geminiContent struct {
@@ -158,7 +158,7 @@ func (p *GeminiProvider) Complete(ctx context.Context, req CompletionRequest) (*
 
 	// Gemini uses query parameter for API key
 	url := fmt.Sprintf("%s/models/%s:generateContent?key=%s", p.config.BaseURL, p.config.Model, p.config.APIKey)
-	
+
 	httpReq, err := http.NewRequestWithContext(ctx, "POST", url, bytes.NewReader(body))
 	if err != nil {
 		return nil, fmt.Errorf("failed to create request: %w", err)

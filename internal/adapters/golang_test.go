@@ -35,7 +35,7 @@ func (u *User) GetName() string {
 		ast, err := adapter.ParseFile(code)
 		assert.NoError(t, err)
 		assert.Len(t, ast.Definitions, 1)
-		
+
 		def := ast.Definitions[0]
 		assert.Equal(t, "GetName", def.Name)
 		assert.True(t, def.IsMethod)
@@ -45,13 +45,13 @@ func (u *User) GetName() string {
 
 func TestGoAdapter_GetPromptTemplate(t *testing.T) {
 	adapter := NewGoAdapter()
-	
+
 	t.Run("Unit test prompt", func(t *testing.T) {
 		prompt := adapter.GetPromptTemplate("unit")
 		assert.Contains(t, prompt, "Generate idiomatic Go tests")
 		assert.Contains(t, prompt, "testing")
 	})
-	
+
 	t.Run("Table driven prompt", func(t *testing.T) {
 		prompt := adapter.GetPromptTemplate("table-driven")
 		assert.Contains(t, prompt, "table-driven tests")
@@ -61,10 +61,10 @@ func TestGoAdapter_GetPromptTemplate(t *testing.T) {
 
 func TestGoAdapter_GenerateTestPath(t *testing.T) {
 	adapter := NewGoAdapter()
-	
+
 	path := adapter.GenerateTestPath("/pkg/utils/math.go", "")
 	assert.Contains(t, path, "math_test.go")
-	
+
 	pathWithOutDir := adapter.GenerateTestPath("/pkg/utils/math.go", "/tests")
 	assert.Equal(t, "/tests/math_test.go", pathWithOutDir)
 }

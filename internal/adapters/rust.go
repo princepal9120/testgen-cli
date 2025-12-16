@@ -406,7 +406,7 @@ func (a *RustAdapter) RunTests(testDir string) (*models.TestResults, error) {
 
 	// Parse output for pass/fail counts
 	outputStr := string(output)
-	
+
 	// Pattern: test result: ok. X passed; Y failed; Z ignored
 	resultRegex := regexp.MustCompile(`test result:.*?(\d+) passed.*?(\d+) failed`)
 	if matches := resultRegex.FindStringSubmatch(outputStr); len(matches) > 2 {

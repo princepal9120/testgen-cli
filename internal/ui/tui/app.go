@@ -170,16 +170,16 @@ type NavigateMsg struct {
 }
 
 type RunConfig struct {
-	Mode       string // "generate" or "analyze"
-	Path       string
-	File       string
-	Recursive  bool
-	Types      []string
-	DryRun     bool
-	Validate   bool
-	Parallel   int
-	CostEst    bool
-	Detail     string
+	Mode      string // "generate" or "analyze"
+	Path      string
+	File      string
+	Recursive bool
+	Types     []string
+	DryRun    bool
+	Validate  bool
+	Parallel  int
+	CostEst   bool
+	Detail    string
 }
 
 type GenerateCompleteMsg struct {

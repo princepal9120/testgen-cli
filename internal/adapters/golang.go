@@ -76,17 +76,17 @@ func (a *GoAdapter) ParseFile(content string) (*models.AST, error) {
 	// Extract function definitions
 	// Pattern: func (receiver) FunctionName(params) (returns) {
 	funcRegex := regexp.MustCompile(`(?m)^func\s+(?:\((\w+)\s+\*?(\w+)\)\s+)?(\w+)\s*\(([^)]*)\)\s*(?:\(([^)]*)\)|(\w+))?\s*\{`)
-	
+
 	lines := strings.Split(content, "\n")
 	matches := funcRegex.FindAllStringSubmatchIndex(content, -1)
-	
+
 	for _, matchIdx := range matches {
 		if len(matchIdx) < 2 {
 			continue
 		}
 
 		fullMatch := content[matchIdx[0]:matchIdx[1]]
-		
+
 		// Calculate line number
 		lineNum := strings.Count(content[:matchIdx[0]], "\n") + 1
 

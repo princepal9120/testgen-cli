@@ -5,26 +5,26 @@ package models
 
 // SourceFile represents a source file to generate tests for
 type SourceFile struct {
-	Path       string   `json:"path"`
-	Language   string   `json:"language"`
-	Framework  string   `json:"framework,omitempty"`
-	Content    string   `json:"-"` // Not serialized
-	LineCount  int      `json:"line_count"`
-	Functions  []string `json:"functions,omitempty"`
+	Path      string   `json:"path"`
+	Language  string   `json:"language"`
+	Framework string   `json:"framework,omitempty"`
+	Content   string   `json:"-"` // Not serialized
+	LineCount int      `json:"line_count"`
+	Functions []string `json:"functions,omitempty"`
 }
 
 // Definition represents a function or method extracted from source code
 type Definition struct {
-	Name        string   `json:"name"`
-	Signature   string   `json:"signature"`
-	Body        string   `json:"body"`
-	StartLine   int      `json:"start_line"`
-	EndLine     int      `json:"end_line"`
-	IsMethod    bool     `json:"is_method"`
-	ClassName   string   `json:"class_name,omitempty"`
-	Parameters  []Param  `json:"parameters,omitempty"`
-	ReturnType  string   `json:"return_type,omitempty"`
-	Docstring   string   `json:"docstring,omitempty"`
+	Name       string  `json:"name"`
+	Signature  string  `json:"signature"`
+	Body       string  `json:"body"`
+	StartLine  int     `json:"start_line"`
+	EndLine    int     `json:"end_line"`
+	IsMethod   bool    `json:"is_method"`
+	ClassName  string  `json:"class_name,omitempty"`
+	Parameters []Param `json:"parameters,omitempty"`
+	ReturnType string  `json:"return_type,omitempty"`
+	Docstring  string  `json:"docstring,omitempty"`
 }
 
 // Param represents a function parameter
@@ -76,15 +76,15 @@ type TestResults struct {
 
 // UsageMetrics tracks API usage and costs
 type UsageMetrics struct {
-	RunID           string  `json:"run_id"`
-	Timestamp       string  `json:"timestamp"`
-	TotalFiles      int     `json:"total_files"`
-	TokensInput     int     `json:"tokens_input"`
-	TokensOutput    int     `json:"tokens_output"`
-	TokensCached    int     `json:"tokens_cached"`
-	CacheHitRate    float64 `json:"cache_hit_rate"`
-	TotalCostUSD    float64 `json:"total_cost_usd"`
-	ExecutionTimeS  float64 `json:"execution_time_seconds"`
-	SuccessCount    int     `json:"success_count"`
-	ErrorCount      int     `json:"error_count"`
+	RunID          string  `json:"run_id"`
+	Timestamp      string  `json:"timestamp"`
+	TotalFiles     int     `json:"total_files"`
+	TokensInput    int     `json:"tokens_input"`
+	TokensOutput   int     `json:"tokens_output"`
+	TokensCached   int     `json:"tokens_cached"`
+	CacheHitRate   float64 `json:"cache_hit_rate"`
+	TotalCostUSD   float64 `json:"total_cost_usd"`
+	ExecutionTimeS float64 `json:"execution_time_seconds"`
+	SuccessCount   int     `json:"success_count"`
+	ErrorCount     int     `json:"error_count"`
 }

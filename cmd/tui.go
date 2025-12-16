@@ -1,8 +1,8 @@
 package cmd
 
 import (
-	"github.com/spf13/cobra"
 	"github.com/princepal9120/testgen-cli/internal/ui/tui"
+	"github.com/spf13/cobra"
 )
 
 // tuiCmd represents the tui command

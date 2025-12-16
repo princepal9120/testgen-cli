@@ -9,13 +9,13 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/spf13/cobra"
-	"github.com/spf13/viper"
 	"github.com/princepal9120/testgen-cli/internal/adapters"
 	"github.com/princepal9120/testgen-cli/internal/generator"
 	"github.com/princepal9120/testgen-cli/internal/scanner"
 	"github.com/princepal9120/testgen-cli/internal/ui"
 	"github.com/princepal9120/testgen-cli/pkg/models"
+	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 )
 
 var (

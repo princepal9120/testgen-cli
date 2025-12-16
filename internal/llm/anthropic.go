@@ -62,11 +62,11 @@ func (p *AnthropicProvider) Configure(config ProviderConfig) error {
 
 // anthropicRequest represents the Anthropic API request
 type anthropicRequest struct {
-	Model       string            `json:"model"`
-	MaxTokens   int               `json:"max_tokens"`
-	Messages    []Message         `json:"messages"`
-	System      string            `json:"system,omitempty"`
-	Temperature float32           `json:"temperature,omitempty"`
+	Model       string    `json:"model"`
+	MaxTokens   int       `json:"max_tokens"`
+	Messages    []Message `json:"messages"`
+	System      string    `json:"system,omitempty"`
+	Temperature float32   `json:"temperature,omitempty"`
 }
 
 // anthropicResponse represents the Anthropic API response

@@ -40,7 +40,7 @@ func TestScanner_ShouldInclude(t *testing.T) {
 		ExcludePattern: "excluded_*",
 		IncludePattern: "included_*",
 	})
-	
+
 	// Default hardcoded ignores
 	assert.True(t, s.shouldIgnoreDir("node_modules"))
 	assert.True(t, s.shouldIgnoreDir(".git"))
@@ -63,14 +63,14 @@ func TestScanner_Scan_Integration(t *testing.T) {
 	// - ignored.txt
 	// - subdir/valid.js
 	// - node_modules/ignored.js
-	
+
 	createFile(t, tmpDir, "valid.py")
 	createFile(t, tmpDir, "ignored.txt")
-	
+
 	subDir := filepath.Join(tmpDir, "subdir")
 	assert.NoError(t, os.Mkdir(subDir, 0755))
 	createFile(t, subDir, "valid.js")
-	
+
 	ignoredDir := filepath.Join(tmpDir, "node_modules")
 	assert.NoError(t, os.Mkdir(ignoredDir, 0755))
 	createFile(t, ignoredDir, "ignored.js")
@@ -78,10 +78,10 @@ func TestScanner_Scan_Integration(t *testing.T) {
 	// Scan
 	s := New(Options{Recursive: true})
 	files, err := s.Scan(tmpDir)
-	
+
 	assert.NoError(t, err)
 	assert.Len(t, files, 2) // valid.py, subdir/valid.js
-	
+
 	paths := make([]string, len(files))
 	for i, f := range files {
 		paths[i] = filepath.Base(f.Path)
