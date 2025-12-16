@@ -61,48 +61,54 @@
 
             <section id="installation">
                 <h2>Installation</h2>
-                <p>TestGen is available as a standalone binary for macOS, Windows, and Linux.</p>
+                <p>Install testgen on your local machine. It comes as a single binary with zero dependencies.</p>
 
                 <!-- Tabs -->
                 <div class="docs-tabs">
-                    <button class="docs-tab active" onclick="switchTab('macos')">macOS</button>
+                    <button class="docs-tab active" onclick="switchTab('unix')">macOS / Linux</button>
                     <button class="docs-tab" onclick="switchTab('windows')">Windows</button>
-                    <button class="docs-tab" onclick="switchTab('linux')">Linux</button>
+                    <button class="docs-tab" onclick="switchTab('source')">From Source</button>
                 </div>
 
-                <div id="macos" class="tab-content active">
-                    <h3>macOS</h3>
-                    <p>Install via curl:</p>
-                    <div class="code-block">
-                        <pre><code># Apple Silicon
-curl -L https://github.com/princepal9120/testgen-cli/releases/latest/download/testgen-darwin-arm64 -o testgen
-
-# Intel
-curl -L https://github.com/princepal9120/testgen-cli/releases/latest/download/testgen-darwin-amd64 -o testgen
-
-chmod +x testgen
-sudo mv testgen /usr/local/bin/</code></pre>
+                <div id="unix" class="tab-content active">
+                    <div class="code-block-minimal">
+                        <pre><code>curl -fsSL https://raw.githubusercontent.com/princepal9120/testgen-cli/main/install.sh | bash</code></pre>
+                        <button class="copy-icon" onclick="copyCode(this)" title="Copy to clipboard">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                            </svg>
+                        </button>
                     </div>
                 </div>
 
                 <div id="windows" class="tab-content">
-                    <h3>Windows</h3>
-                    <p>Download the executable via PowerShell:</p>
-                    <div class="code-block">
-                        <pre><code>Invoke-WebRequest -Uri "https://github.com/princepal9120/testgen-cli/releases/latest/download/testgen-windows-amd64.exe" -OutFile "testgen.exe"
-
-# Move to a folder in your PATH, e.g. C:\tools
-move testgen.exe C:\tools\</code></pre>
+                    <div class="code-block-minimal">
+                        <pre><code>irm https://raw.githubusercontent.com/princepal9120/testgen-cli/main/install.ps1 | iex</code></pre>
+                        <button class="copy-icon" onclick="copyCode(this)" title="Copy to clipboard">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                            </svg>
+                        </button>
                     </div>
                 </div>
 
-                <div id="linux" class="tab-content">
-                    <h3>Linux</h3>
-                    <p>Install via curl:</p>
-                    <div class="code-block">
-                        <pre><code>curl -L https://github.com/princepal9120/testgen-cli/releases/latest/download/testgen-linux-amd64 -o testgen
-chmod +x testgen
-sudo mv testgen /usr/local/bin/</code></pre>
+                <div id="source" class="tab-content">
+                    <div class="code-block-minimal">
+                        <pre><code>go install github.com/princepal9120/testgen-cli@latest</code></pre>
+                        <button class="copy-icon" onclick="copyCode(this)" title="Copy to clipboard">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                            </svg>
+                        </button>
                     </div>
                 </div>
             </section>
@@ -252,6 +258,28 @@ Ctrl+X             Cancel running operation</code></pre>
             // Show selected
             document.getElementById(os).style.display = 'block';
             event.target.classList.add('active');
+        }
+
+        function copyCode(btn) {
+            const codeBlock = btn.parentElement.querySelector('code');
+            const text = codeBlock.innerText;
+
+            navigator.clipboard.writeText(text).then(() => {
+                btn.classList.add('copied');
+
+                // Change icon to checkmark temporarily
+                const originalSvg = btn.innerHTML;
+                btn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>`;
+
+                setTimeout(() => {
+                    btn.innerHTML = originalSvg;
+                    btn.classList.remove('copied');
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy:', err);
+            });
         }
     </script>
 </body>
