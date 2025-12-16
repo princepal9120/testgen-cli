@@ -563,6 +563,62 @@ h6 {
     padding: 20px;
     margin: 24px 0;
     overflow-x: auto;
+    position: relative;
+}
+
+/* Minimal Code Block (like reference) */
+.code-block-minimal {
+    background: #F8F9FA;
+    border: 1px solid #E5E7EB;
+    border-radius: 8px;
+    padding: 16px 60px 16px 20px;
+    margin: 16px 0;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.code-block-minimal pre {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    color: #374151;
+    white-space: nowrap;
+    overflow-x: auto;
+    flex: 1;
+}
+
+.code-block-minimal code {
+    background: none;
+    padding: 0;
+}
+
+/* Copy Icon Button */
+.copy-icon {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    color: #9CA3AF;
+    transition: all 0.2s ease;
+    border-radius: 6px;
+}
+
+.copy-icon:hover {
+    color: var(--accent-primary);
+    background: rgba(79, 70, 229, 0.1);
+}
+
+.copy-icon.copied {
+    color: #10B981;
+}
+
+.copy-icon.copied svg {
+    stroke: #10B981;
 }
 
 .docs-content pre {

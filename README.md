@@ -8,6 +8,17 @@
 
 TestGen automatically generates production-ready tests for source code across JavaScript/TypeScript, Python, Go, and Rust using LLM APIs (Anthropic Claude, OpenAI GPT, Google Gemini, Groq).
 
+```
+ ████████╗███████╗███████╗████████╗ ██████╗ ███████╗███╗   ██╗
+ ╚══██╔══╝██╔════╝██╔════╝╚══██╔══╝██╔════╝ ██╔════╝████╗  ██║
+    ██║   █████╗  ███████╗   ██║   ██║  ███╗█████╗  ██╔██╗ ██║
+    ██║   ██╔══╝  ╚════██║   ██║   ██║   ██║██╔══╝  ██║╚██╗██║
+    ██║   ███████╗███████║   ██║   ╚██████╔╝███████╗██║ ╚████║
+    ╚═╝   ╚══════╝╚══════╝   ╚═╝    ╚═════╝ ╚══════╝╚═╝  ╚═══╝
+ 
+                     Universal TEST Generator
+
+  ```
 ## Features
 
 - 🖥️ **Interactive TUI Mode**: Full terminal UI with visual forms and live progress
@@ -19,6 +30,20 @@ TestGen automatically generates production-ready tests for source code across Ja
 - 🏗️ **Clean Architecture**: Extensible adapter pattern
 
 ## Installation
+
+### Quick Install (Recommended)
+
+**macOS / Linux:**
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/princepal9120/testgen-cli/main/install.sh | bash
+```
+
+**Windows (PowerShell):**
+
+```powershell
+irm https://raw.githubusercontent.com/princepal9120/testgen-cli/main/install.ps1 | iex
+```
 
 ### From Source
 
@@ -36,7 +61,12 @@ go install .
 
 ### Binary Releases
 
-Download from [GitHub Releases](https://github.com/princepal9120/testgen-cli/releases).
+Download pre-built binaries from [GitHub Releases](https://github.com/princepal9120/testgen-cli/releases).
+
+Supported platforms:
+- **Linux**: x86_64, aarch64
+- **macOS**: x86_64, aarch64 (Apple Silicon)
+- **Windows**: x86_64
 
 ## Quick Start
 
