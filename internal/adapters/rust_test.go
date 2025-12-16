@@ -1,6 +1,7 @@
 package adapters
 
 import (
+	"path/filepath"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -69,9 +70,9 @@ func TestRustAdapter_GenerateTestPath(t *testing.T) {
 
 	// Inline tests (default behavior if no tests dir)
 	path := adapter.GenerateTestPath("/src/lib.rs", "")
-	assert.Contains(t, path, "lib.rs.test") // This is our fallback
+	assert.Contains(t, filepath.ToSlash(path), "lib.rs.test") // This is our fallback
 
 	// Explicit output dir
 	pathWithDir := adapter.GenerateTestPath("/src/lib.rs", "/tests")
-	assert.Equal(t, "/tests/lib_test.rs", pathWithDir)
+	assert.Equal(t, "/tests/lib_test.rs", filepath.ToSlash(pathWithDir))
 }

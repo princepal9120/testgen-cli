@@ -7,26 +7,51 @@ import (
 	"path/filepath"
 	"runtime"
 	"strings"
+	"sync"
 	"testing"
+)
+
+var (
+	binaryPath string
+	buildOnce  sync.Once
+	buildErr   error
 )
 
 // getBinaryPath returns the path to the testgen binary
 func getBinaryPath(t *testing.T) string {
 	t.Helper()
 
-	// Build the binary first
-	buildCmd := exec.Command("go", "build", "-o", "testgen_test_binary", ".")
-	buildCmd.Dir = filepath.Join("..")
-	if err := buildCmd.Run(); err != nil {
-		t.Fatalf("Failed to build binary: %v", err)
+	buildOnce.Do(func() {
+		// Get the root directory (parent of tests/)
+		rootDir, err := filepath.Abs("..")
+		if err != nil {
+			buildErr = err
+			return
+		}
+
+		binaryName := "testgen_test_binary"
+		if runtime.GOOS == "windows" {
+			binaryName += ".exe"
+		}
+
+		binaryPath = filepath.Join(rootDir, binaryName)
+
+		// Build the binary
+		buildCmd := exec.Command("go", "build", "-o", binaryName, ".")
+		buildCmd.Dir = rootDir
+		output, err := buildCmd.CombinedOutput()
+		if err != nil {
+			buildErr = err
+			t.Logf("Build output: %s", string(output))
+			return
+		}
+	})
+
+	if buildErr != nil {
+		t.Fatalf("Failed to build binary: %v", buildErr)
 	}
 
-	binaryName := "testgen_test_binary"
-	if runtime.GOOS == "windows" {
-		binaryName += ".exe"
-	}
-
-	return filepath.Join("..", binaryName)
+	return binaryPath
 }
 
 // runCmd executes the testgen binary with args and returns stdout, stderr, and error
@@ -48,19 +73,13 @@ func runCmdInDir(t *testing.T, dir string, args ...string) (string, string, erro
 	t.Helper()
 	binary := getBinaryPath(t)
 
-	// Convert to absolute path
-	absPath, err := filepath.Abs(binary)
-	if err != nil {
-		t.Fatalf("Failed to get absolute path: %v", err)
-	}
-
-	cmd := exec.Command(absPath, args...)
+	cmd := exec.Command(binary, args...)
 	cmd.Dir = dir
 	var stdout, stderr bytes.Buffer
 	cmd.Stdout = &stdout
 	cmd.Stderr = &stderr
 
-	err = cmd.Run()
+	err := cmd.Run()
 	return stdout.String(), stderr.String(), err
 }
 
@@ -389,10 +408,8 @@ impl Calculator {
 // ============================================
 
 func TestCleanup(t *testing.T) {
-	// Clean up the test binary
-	binaryName := "testgen_test_binary"
-	if runtime.GOOS == "windows" {
-		binaryName += ".exe"
+	// Clean up the test binary using the global path
+	if binaryPath != "" {
+		os.Remove(binaryPath)
 	}
-	os.Remove(filepath.Join("..", binaryName))
 }

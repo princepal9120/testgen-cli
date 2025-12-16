@@ -1,6 +1,7 @@
 package adapters
 
 import (
+	"path/filepath"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -76,8 +77,8 @@ func TestPythonAdapter_GenerateTestPath(t *testing.T) {
 
 	path := adapter.GenerateTestPath("/src/app/utils.py", "")
 	// Expect ../tests/test_utils.py relative to file
-	assert.Contains(t, path, "tests/test_utils.py")
+	assert.Contains(t, filepath.ToSlash(path), "tests/test_utils.py")
 
 	pathWithOutDir := adapter.GenerateTestPath("/src/app/utils.py", "/tmp/tests")
-	assert.Equal(t, "/tmp/tests/test_utils.py", pathWithOutDir)
+	assert.Equal(t, "/tmp/tests/test_utils.py", filepath.ToSlash(pathWithOutDir))
 }

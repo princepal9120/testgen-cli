@@ -1,6 +1,7 @@
 package adapters
 
 import (
+	"path/filepath"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -63,8 +64,8 @@ func TestGoAdapter_GenerateTestPath(t *testing.T) {
 	adapter := NewGoAdapter()
 
 	path := adapter.GenerateTestPath("/pkg/utils/math.go", "")
-	assert.Contains(t, path, "math_test.go")
+	assert.Contains(t, filepath.ToSlash(path), "math_test.go")
 
 	pathWithOutDir := adapter.GenerateTestPath("/pkg/utils/math.go", "/tests")
-	assert.Equal(t, "/tests/math_test.go", pathWithOutDir)
+	assert.Equal(t, "/tests/math_test.go", filepath.ToSlash(pathWithOutDir))
 }
