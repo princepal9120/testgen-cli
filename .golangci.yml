@@ -1,0 +1,34 @@
+# GolangCI-Lint configuration
+# https://golangci-lint.run/usage/configuration/
+
+run:
+  timeout: 5m
+  modules-download-mode: readonly
+
+linters:
+  enable:
+    - gofmt
+    - govet
+    - staticcheck
+    - ineffassign
+    - typecheck
+  disable:
+    - errcheck  # Too strict for early-stage projects
+    - unused    # Some code is intentionally kept for future use
+
+linters-settings:
+  staticcheck:
+    checks:
+      - all
+      - "-SA9003"  # Disable empty branch check
+
+issues:
+  exclude-rules:
+    # Exclude errcheck for certain functions
+    - linters:
+        - errcheck
+      text: "Error return value"
+    # Exclude unused for test files
+    - path: _test\.go
+      linters:
+        - unused
