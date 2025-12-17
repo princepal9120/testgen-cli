@@ -9,6 +9,7 @@ import (
 	"strings"
 	"sync"
 
+	"github.com/charmbracelet/lipgloss"
 	"github.com/princepal9120/testgen-cli/internal/adapters"
 	"github.com/princepal9120/testgen-cli/internal/generator"
 	"github.com/princepal9120/testgen-cli/internal/scanner"
@@ -16,6 +17,15 @@ import (
 	"github.com/princepal9120/testgen-cli/pkg/models"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
+)
+
+// CLI output styles
+var (
+	successMark = lipgloss.NewStyle().Foreground(lipgloss.Color("10")).Render("✓")
+	errorMark   = lipgloss.NewStyle().Foreground(lipgloss.Color("9")).Render("✗")
+	warnMark    = lipgloss.NewStyle().Foreground(lipgloss.Color("11")).Render("⚠")
+	infoStyle   = lipgloss.NewStyle().Foreground(lipgloss.Color("12"))
+	dimStyle    = lipgloss.NewStyle().Foreground(lipgloss.Color("8"))
 )
 
 var (
@@ -301,7 +311,7 @@ func processFiles(files []*models.SourceFile, engine *generator.Engine, log *slo
 
 		// Update status for non-quiet mode
 		if !quiet && genOutputFormat != "json" {
-			fmt.Printf("\r  ✓ [%d/%d] %s\n", i+1, len(files), filepath.Base(file.Path))
+			fmt.Printf("\r  %s [%d/%d] %s\n", successMark, i+1, len(files), filepath.Base(file.Path))
 		}
 	}
 
@@ -348,7 +358,7 @@ func outputJSON(results []*models.GenerationResult) error {
 func outputText(results []*models.GenerationResult, dryRun bool) error {
 	for _, r := range results {
 		if r.Error != nil {
-			fmt.Printf("✗ %s: %v\n", r.SourceFile.Path, r.Error)
+			fmt.Printf("%s %s: %v\n", errorMark, r.SourceFile.Path, r.Error)
 			continue
 		}
 
@@ -357,7 +367,8 @@ func outputText(results []*models.GenerationResult, dryRun bool) error {
 			fmt.Println(r.TestCode)
 			fmt.Println()
 		} else if r.TestPath != "" {
-			fmt.Printf("✓ %s → %s (%d functions)\n", r.SourceFile.Path, r.TestPath, len(r.FunctionsTested))
+			funcInfo := dimStyle.Render(fmt.Sprintf("(%d functions)", len(r.FunctionsTested)))
+			fmt.Printf("%s %s → %s %s\n", successMark, r.SourceFile.Path, r.TestPath, funcInfo)
 		}
 	}
 	return nil

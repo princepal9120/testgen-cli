@@ -10,6 +10,7 @@ type Screen int
 
 const (
 	ScreenHome Screen = iota
+	ScreenAPIKeySetup
 	ScreenGenerateConfig
 	ScreenAnalyzeConfig
 	ScreenPreview
@@ -22,6 +23,7 @@ type AppModel struct {
 	width          int
 	height         int
 	home           HomeModel
+	apiKeySetup    APIKeySetupModel
 	generateConfig GenerateConfigModel
 	analyzeConfig  AnalyzeConfigModel
 	preview        PreviewModel
@@ -34,6 +36,7 @@ func NewAppModel() AppModel {
 	return AppModel{
 		screen:         ScreenHome,
 		home:           NewHomeModel(),
+		apiKeySetup:    NewAPIKeySetupModel(),
 		generateConfig: NewGenerateConfigModel(),
 		analyzeConfig:  NewAnalyzeConfigModel(),
 		preview:        NewPreviewModel(),
@@ -84,6 +87,8 @@ func (m AppModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	switch m.screen {
 	case ScreenHome:
 		m.home, cmd = m.home.Update(msg)
+	case ScreenAPIKeySetup:
+		m.apiKeySetup, cmd = m.apiKeySetup.Update(msg)
 	case ScreenGenerateConfig:
 		m.generateConfig, cmd = m.generateConfig.Update(msg)
 	case ScreenAnalyzeConfig:
@@ -105,6 +110,11 @@ func (m AppModel) handleNavigation(msg NavigateMsg) (tea.Model, tea.Cmd) {
 		m.screen = ScreenHome
 		m.home = NewHomeModel()
 		return m, m.home.Init()
+
+	case ScreenAPIKeySetup:
+		m.screen = ScreenAPIKeySetup
+		m.apiKeySetup = NewAPIKeySetupModel()
+		return m, m.apiKeySetup.Init()
 
 	case ScreenGenerateConfig:
 		m.screen = ScreenGenerateConfig
@@ -142,6 +152,8 @@ func (m AppModel) View() string {
 	switch m.screen {
 	case ScreenHome:
 		return m.home.View()
+	case ScreenAPIKeySetup:
+		return m.apiKeySetup.View()
 	case ScreenGenerateConfig:
 		return m.generateConfig.View()
 	case ScreenAnalyzeConfig:

@@ -22,6 +22,7 @@ type HomeModel struct {
 
 func NewHomeModel() HomeModel {
 	items := []list.Item{
+		menuItem{title: "Configure API Key", desc: "Set up your LLM provider API key"},
 		menuItem{title: "Generate Tests", desc: "Generate unit tests for source files"},
 		menuItem{title: "Analyze Codebase", desc: "Analyze files and estimate costs"},
 	}
@@ -50,11 +51,16 @@ func (m HomeModel) Update(msg tea.Msg) (HomeModel, tea.Cmd) {
 		case "enter":
 			if item, ok := m.list.SelectedItem().(menuItem); ok {
 				m.choice = item.title
-				if m.choice == "Generate Tests" {
+				switch m.choice {
+				case "Configure API Key":
+					return m, func() tea.Msg {
+						return NavigateMsg{To: ScreenAPIKeySetup}
+					}
+				case "Generate Tests":
 					return m, func() tea.Msg {
 						return NavigateMsg{To: ScreenGenerateConfig}
 					}
-				} else if m.choice == "Analyze Codebase" {
+				case "Analyze Codebase":
 					return m, func() tea.Msg {
 						return NavigateMsg{To: ScreenAnalyzeConfig}
 					}
