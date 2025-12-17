@@ -8,7 +8,7 @@ on:
     branches: [main]
 
 env:
-  GO_VERSION: "1.23"
+  GO_VERSION: "1.24"
 
 jobs:
   lint:
@@ -52,6 +52,18 @@ jobs:
         with:
           go-version: ${{ env.GO_VERSION }}
           cache: true
+      
+      # Clean up any stray .out directories that cause "no required module provides package .out" error
+      - name: Clean up stray directories (Unix)
+        if: runner.os != 'Windows'
+        run: rm -rf .out coverage.out
+      
+      - name: Clean up stray directories (Windows)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          if (Test-Path ".out") { Remove-Item -Recurse -Force ".out" }
+          if (Test-Path "coverage.out") { Remove-Item -Force "coverage.out" }
       
       - name: Run tests with coverage (Unix)
         if: runner.os != 'Windows'
