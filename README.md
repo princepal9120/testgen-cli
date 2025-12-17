@@ -70,16 +70,40 @@ Supported platforms:
 
 ## Quick Start
 
-```bash
-# Set your API key (choose one provider)
-export ANTHROPIC_API_KEY="your-api-key"    # Anthropic Claude
-# or
-export OPENAI_API_KEY="your-api-key"       # OpenAI GPT
-# or
-export GEMINI_API_KEY="your-api-key"       # Google Gemini
-# or
-export GROQ_API_KEY="your-api-key"         # Groq (fastest, cheapest)
+### Step 1: Get an API Key
 
+Choose a provider and get your API key:
+
+| Provider | Get API Key | Best For |
+|----------|-------------|----------|
+| **Anthropic Claude** | [console.anthropic.com](https://console.anthropic.com/) | Best quality |
+| **OpenAI GPT** | [platform.openai.com](https://platform.openai.com/api-keys) | Most popular |
+| **Google Gemini** | [aistudio.google.com](https://aistudio.google.com/app/apikey) | Free tier |
+| **Groq** | [console.groq.com](https://console.groq.com/keys) | Fastest, free tier |
+
+### Step 2: Set Your API Key
+
+```bash
+# Choose ONE provider and set the environment variable:
+
+# Anthropic Claude (recommended)
+export ANTHROPIC_API_KEY="sk-ant-api03-xxxxx"
+
+# OpenAI GPT
+export OPENAI_API_KEY="sk-xxxxx"
+
+# Google Gemini (free tier available)
+export GEMINI_API_KEY="AIzaSyxxxxx"
+
+# Groq (fastest, free tier)
+export GROQ_API_KEY="gsk_xxxxx"
+```
+
+> 💡 **Tip**: Add this to your `~/.bashrc` or `~/.zshrc` to persist across sessions.
+
+### Step 3: Generate Tests
+
+```bash
 # Launch interactive TUI mode
 testgen tui
 
