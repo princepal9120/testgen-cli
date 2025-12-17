@@ -27,9 +27,16 @@ function Get-LatestVersion {
 }
 
 function Install-Testgen {
+    # ASCII Art Banner
     Write-Host ""
-    Write-Host "  🧪 testgen-cli - AI-Powered Test Generation CLI Installer" -ForegroundColor Magenta
-    Write-Host "  ==========================================================" -ForegroundColor Magenta
+    Write-Host "  ████████╗███████╗███████╗████████╗ ██████╗ ███████╗███╗   ██╗" -ForegroundColor Blue
+    Write-Host "  ╚══██╔══╝██╔════╝██╔════╝╚══██╔══╝██╔════╝ ██╔════╝████╗  ██║" -ForegroundColor Blue
+    Write-Host "     ██║   █████╗  ███████╗   ██║   ██║  ███╗█████╗  ██╔██╗ ██║" -ForegroundColor Blue
+    Write-Host "     ██║   ██╔══╝  ╚════██║   ██║   ██║   ██║██╔══╝  ██║╚██╗██║" -ForegroundColor Blue
+    Write-Host "     ██║   ███████╗███████║   ██║   ╚██████╔╝███████╗██║ ╚████║" -ForegroundColor Blue
+    Write-Host "     ╚═╝   ╚══════╝╚══════╝   ╚═╝    ╚═════╝ ╚══════╝╚═╝  ╚═══╝" -ForegroundColor Blue
+    Write-Host ""
+    Write-Host "              🧪 AI-Powered Test Generation CLI" -ForegroundColor Green
     Write-Host ""
 
     # Detect architecture
@@ -107,9 +114,10 @@ function Install-Testgen {
         }
 
         Write-Host ""
-        Write-Success "Installation complete!"
+        Write-Host "  ✅ Installation complete!" -ForegroundColor Green
         Write-Host ""
-        Write-Host "  Run 'testgen --help' to get started" -ForegroundColor Cyan
+        Write-Host "  Run " -NoNewline; Write-Host "testgen --help" -ForegroundColor Blue -NoNewline; Write-Host " to get started"
+        Write-Host "  Or launch the TUI with " -NoNewline; Write-Host "testgen tui" -ForegroundColor Blue
         Write-Host ""
 
     } finally {
