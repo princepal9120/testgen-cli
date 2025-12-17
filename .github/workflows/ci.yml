@@ -8,7 +8,7 @@ on:
     branches: [main]
 
 env:
-  GO_VERSION: "1.23"
+  GO_VERSION: "1.24"
 
 jobs:
   lint:
@@ -47,12 +47,22 @@ jobs:
           go-version: ${{ env.GO_VERSION }}
       - name: Run tests (Unix)
         if: runner.os != 'Windows'
-        run: go test -v -race -timeout 5m ./...
+        run: go test -v -race -timeout 5m $(go list ./... | grep -v '/\.out')
       - name: Run tests (Windows)
         if: runner.os == 'Windows'
-        run: go test -v -timeout 5m ./...
-      - name: Run tests with coverage
-        run: go test -coverprofile=coverage.out ./...
+        shell: pwsh
+        run: |
+          $packages = go list ./... | Where-Object { $_ -notmatch '\.out' }
+          go test -v -timeout 5m $packages
+      - name: Run tests with coverage (Unix)
+        if: runner.os != 'Windows'
+        run: go test -coverprofile=coverage.out $(go list ./... | grep -v '/\.out')
+      - name: Run tests with coverage (Windows)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          $packages = go list ./... | Where-Object { $_ -notmatch '\.out' }
+          go test -coverprofile=coverage.out $packages
       - name: Upload coverage
         if: matrix.os == 'ubuntu-latest'
         uses: codecov/codecov-action@v4
@@ -112,13 +122,10 @@ jobs:
           GOOS: ${{ matrix.goos }}
           GOARCH: ${{ matrix.goarch }}
           CGO_ENABLED: 0
-        run: |
-          if [ "${{ matrix.goos }}" = "windows" ]; then
-            go build -ldflags="-s -w" -o ${{ matrix.artifact }} .
-          else
-            go build -ldflags="-s -w" -o ${{ matrix.artifact }} .
-          fi
         shell: bash
+        run: |
+          VERSION=${GITHUB_REF#refs/tags/}
+          go build -ldflags="-s -w -X github.com/princepal9120/testgen-cli/cmd.Version=${VERSION}" -o ${{ matrix.artifact }} .
 
       - name: Prepare artifact (Unix)
         if: runner.os != 'Windows'

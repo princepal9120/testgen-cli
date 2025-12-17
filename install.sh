@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 set -euo pipefail
 
 REPO="princepal9120/testgen-cli"
@@ -102,7 +102,8 @@ download_binary() {
     print_info "Downloading ${asset_name}..."
 
     local tmp_dir=$(mktemp -d)
-    local tmp_binary="${tmp_dir}/${BINARY_NAME}"
+    # Download with original asset name to match checksum file
+    local tmp_binary="${tmp_dir}/${asset_name}"
     local tmp_checksum="${tmp_dir}/${asset_name}.sha256"
 
     # Download binary
@@ -116,14 +117,18 @@ download_binary() {
     print_info "Verifying checksum..."
     if curl -sL "$checksum_url" -o "$tmp_checksum" 2>/dev/null; then
         cd "$tmp_dir"
+        # Extract expected hash from checksum file
+        local expected_hash=$(cat "$tmp_checksum" | awk '{print $1}')
+        local actual_hash=""
+        
         if command -v sha256sum &> /dev/null; then
-            if sha256sum -c "$tmp_checksum" --status 2>/dev/null; then
-                print_success "Checksum verified"
-            else
-                print_warning "Checksum verification failed (continuing anyway)"
-            fi
+            actual_hash=$(sha256sum "$asset_name" | awk '{print $1}')
         elif command -v shasum &> /dev/null; then
-            if shasum -a 256 -c "$tmp_checksum" --status 2>/dev/null; then
+            actual_hash=$(shasum -a 256 "$asset_name" | awk '{print $1}')
+        fi
+        
+        if [ -n "$actual_hash" ]; then
+            if [ "$expected_hash" = "$actual_hash" ]; then
                 print_success "Checksum verified"
             else
                 print_warning "Checksum verification failed (continuing anyway)"
@@ -139,7 +144,7 @@ download_binary() {
     # Create install directory if needed
     mkdir -p "$INSTALL_DIR"
 
-    # Install binary
+    # Install binary (rename from asset name to binary name)
     print_info "Installing to ${INSTALL_DIR}/${BINARY_NAME}..."
     mv "$tmp_binary" "${INSTALL_DIR}/${BINARY_NAME}"
     chmod +x "${INSTALL_DIR}/${BINARY_NAME}"

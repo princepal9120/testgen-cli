@@ -13,6 +13,8 @@
 /bin/
 /dist/
 /build/
+.out/
+testgen_test_binary*
 
 # Go workspace file (Go 1.18+)
 go.work

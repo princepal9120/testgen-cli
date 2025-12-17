@@ -21,6 +21,10 @@ import (
 )
 
 var (
+	// Version is set at build time via ldflags
+	// -ldflags="-X github.com/princepal9120/testgen-cli/cmd.Version=v1.0.0"
+	Version = "dev"
+
 	cfgFile string
 	verbose bool
 	quiet   bool
@@ -52,7 +56,7 @@ Examples:
 
   # Validate tests and check coverage
   testgen validate --path=./src --min-coverage=80`,
-	Version: "1.0.0",
+	Version: Version,
 	PersistentPreRunE: func(cmd *cobra.Command, args []string) error {
 		return initConfig()
 	},
