@@ -219,7 +219,7 @@ func (s *Scanner) shouldInclude(path string) bool {
 func (s *Scanner) isSourceFile(path string) bool {
 	ext := strings.ToLower(filepath.Ext(path))
 	sourceExts := []string{
-		".go", ".py", ".js", ".ts", ".jsx", ".tsx", ".rs",
+		".go", ".py", ".js", ".ts", ".jsx", ".tsx", ".rs", ".java",
 	}
 	for _, e := range sourceExts {
 		if ext == e {
@@ -254,6 +254,14 @@ func (s *Scanner) isTestFile(path string) bool {
 	// Rust test files in tests/ directory
 	dir := filepath.Dir(path)
 	if filepath.Base(dir) == "tests" && strings.HasSuffix(lower, ".rs") {
+		return true
+	}
+
+	// Java test files
+	if strings.HasSuffix(lower, "test.java") || strings.HasSuffix(lower, "tests.java") {
+		return true
+	}
+	if strings.HasPrefix(lower, "test") && strings.HasSuffix(lower, ".java") {
 		return true
 	}
 

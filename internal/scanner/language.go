@@ -12,17 +12,19 @@ const (
 	LangJavaScript = "javascript"
 	LangTypeScript = "typescript"
 	LangRust       = "rust"
+	LangJava       = "java"
 )
 
 // extensionMap maps file extensions to languages
 var extensionMap = map[string]string{
-	".go":  LangGo,
-	".py":  LangPython,
-	".js":  LangJavaScript,
-	".jsx": LangJavaScript,
-	".ts":  LangTypeScript,
-	".tsx": LangTypeScript,
-	".rs":  LangRust,
+	".go":   LangGo,
+	".py":   LangPython,
+	".js":   LangJavaScript,
+	".jsx":  LangJavaScript,
+	".ts":   LangTypeScript,
+	".tsx":  LangTypeScript,
+	".rs":   LangRust,
+	".java": LangJava,
 }
 
 // DetectLanguage determines the programming language from a file path
@@ -67,6 +69,8 @@ func NormalizeLanguage(lang string) string {
 		return LangTypeScript
 	case "rs":
 		return LangRust
+	case "jdk", "openjdk", "jvm":
+		return LangJava
 	default:
 		return lower
 	}
