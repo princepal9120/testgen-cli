@@ -64,7 +64,7 @@ public class ListUtils {
 		ast, err := adapter.ParseFile(code)
 		assert.NoError(t, err)
 		assert.Len(t, ast.Definitions, 1)
-		
+
 		def := ast.Definitions[0]
 		assert.Equal(t, "filter", def.Name)
 		assert.Equal(t, "List<String>", def.ReturnType)
@@ -148,11 +148,11 @@ func TestJavaAdapter_GetLanguage(t *testing.T) {
 
 func TestJavaAdapter_GetFrameworks(t *testing.T) {
 	adapter := NewJavaAdapter()
-	
+
 	frameworks := adapter.GetSupportedFrameworks()
 	assert.Contains(t, frameworks, "junit5")
 	assert.Contains(t, frameworks, "junit4")
 	assert.Contains(t, frameworks, "testng")
-	
+
 	assert.Equal(t, "junit5", adapter.GetDefaultFramework())
 }
