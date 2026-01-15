@@ -9,7 +9,8 @@ import (
 type Screen int
 
 const (
-	ScreenHome Screen = iota
+	ScreenOnboarding Screen = iota
+	ScreenHome
 	ScreenAPIKeySetup
 	ScreenGenerateConfig
 	ScreenAnalyzeConfig
@@ -22,6 +23,7 @@ type AppModel struct {
 	screen         Screen
 	width          int
 	height         int
+	onboarding     OnboardingModel
 	home           HomeModel
 	apiKeySetup    APIKeySetupModel
 	generateConfig GenerateConfigModel
@@ -33,8 +35,15 @@ type AppModel struct {
 }
 
 func NewAppModel() AppModel {
+	// Check if this is a first-time user
+	initialScreen := ScreenHome
+	if IsFirstTimeUser() {
+		initialScreen = ScreenOnboarding
+	}
+
 	return AppModel{
-		screen:         ScreenHome,
+		screen:         initialScreen,
+		onboarding:     NewOnboardingModel(),
 		home:           NewHomeModel(),
 		apiKeySetup:    NewAPIKeySetupModel(),
 		generateConfig: NewGenerateConfigModel(),
@@ -46,6 +55,12 @@ func NewAppModel() AppModel {
 }
 
 func (m AppModel) Init() tea.Cmd {
+	if m.screen == ScreenOnboarding {
+		return tea.Batch(
+			m.onboarding.Init(),
+			tea.EnterAltScreen,
+		)
+	}
 	return tea.Batch(
 		m.home.Init(),
 		tea.EnterAltScreen,
@@ -85,6 +100,8 @@ func (m AppModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	// Delegate to current screen
 	var cmd tea.Cmd
 	switch m.screen {
+	case ScreenOnboarding:
+		m.onboarding, cmd = m.onboarding.Update(msg)
 	case ScreenHome:
 		m.home, cmd = m.home.Update(msg)
 	case ScreenAPIKeySetup:
@@ -150,6 +167,8 @@ func (m AppModel) handleNavigation(msg NavigateMsg) (tea.Model, tea.Cmd) {
 
 func (m AppModel) View() string {
 	switch m.screen {
+	case ScreenOnboarding:
+		return m.onboarding.View()
 	case ScreenHome:
 		return m.home.View()
 	case ScreenAPIKeySetup:
